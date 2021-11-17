@@ -23,3 +23,10 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+mybatis:
+  log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
+logging:
+  level:
+    com.shangma.mapper: debug

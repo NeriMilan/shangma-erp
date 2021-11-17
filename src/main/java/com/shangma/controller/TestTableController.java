@@ -26,6 +26,7 @@ public class TestTableController {
     @RequestMapping("/test")
     @ResponseBody
     public AxiosResult test(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "1") int size){
+
         PageInfo pageInfo = testTableService.getAll(page, size);
 
         AxiosResult<PageInfo> success = AxiosResult.success(pageInfo);

@@ -23,4 +23,5 @@ public class CorsConfig implements WebMvcConfigurer {
         CorsFilter corsFilter = new CorsFilter(urlBasedCorsConfigurationSource);
         return corsFilter;
     }
+
 }
