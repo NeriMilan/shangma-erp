@@ -47,13 +47,13 @@
 <!--        <table tableName="book" domainObjectName="Book"></table>-->
 <!--        <table tableName="employee" domainObjectName="Employee"></table>-->
 
-        <table tableName="t_system_user_role" domainObjectName="UserRole"/>
-        <table tableName="t_system_user" domainObjectName="User"/>
-        <table tableName="t_system_role_permission" domainObjectName="RolePermission"/>
-        <table tableName="t_system_role" domainObjectName="Role"/>
-        <table tableName="t_system_permission" domainObjectName="Permission"/>
-        <table tableName="t_system_job" domainObjectName="Job"/>
-        <table tableName="t_system_department" domainObjectName="Department"/>
+<!--        <table tableName="t_system_user_role" domainObjectName="UserRole"/>-->
+<!--        <table tableName="t_system_user" domainObjectName="User"/>-->
+<!--        <table tableName="t_system_role_permission" domainObjectName="RolePermission"/>-->
+<!--        <table tableName="t_system_role" domainObjectName="Role"/>-->
+<!--        <table tableName="t_system_permission" domainObjectName="Permission"/>-->
+<!--        <table tableName="t_system_job" domainObjectName="Job"/>-->
+<!--        <table tableName="t_system_department" domainObjectName="Department"/>-->
 
 
 
