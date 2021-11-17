@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.0.20:3306/shangma-erp
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    client-type: jedis
+    jedis:
+      pool:
+        max-active: 64
+    port: 6379
+    host: 47.99.145.210    # 默认值localhost
+    password: "0000"  # yaml类型默认数值计算, 需要引号
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml # 此即为默认值
+  configuration:
+    map-underscore-to-camel-case: true
