@@ -45,7 +45,7 @@ public class User {
 
     private Long createId;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     private Long updateId;
 
