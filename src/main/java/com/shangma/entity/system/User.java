@@ -3,6 +3,7 @@ package com.shangma.entity.system;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -40,7 +41,7 @@ public class User {
 
     private String remark5;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Long createId;
 
