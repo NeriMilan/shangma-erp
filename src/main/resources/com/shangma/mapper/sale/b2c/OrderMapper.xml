@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+ 添加的内容如下
+-->
+
+<!--
+ namespace 表示命名空间 对sql的操作进行分类化管理  有点类似包管理
+-->
+<mapper namespace="com.shangma.mapper.sale.b2c.OrderMapper">
+
+    <!--是根据id查询用户
+    select标签表示查询
+          id属性： 要求在一个namespace当中唯一 id随意写 但是要唯一
+          parameterType表示参数的java类型
+          resultType  表示查询后的返回值java类型
+          #{id}  表示占位符  传过来是什么  id就等于什么  如果是基本数据类型 这个id可以随意写
+          com.shangma.entity.sale.b2c.SalesOrder
+    -->
+    <resultMap id="mapper01" type="com.shangma.entity.sale.b2c.SalesOrder">
+        <id property="id" column="id"/>
+    </resultMap>
+    <select id="findBySearch" parameterType="com.shangma.entity.sale.b2c.SalesOrder"  resultMap="mapper01">
+        select * from t_b2c_sales_order
+        <where>
+            <if test="orderId!=null and orderId!=''">
+                order_id like '%${orderId}%'
+            </if>
+            <if test="orderType != null and orderType != ''">
+                and order_type like '%${orderType}%'
+            </if>
+            <if test="payment != null and payment != ''">
+                and payment like '%${payment}%'
+            </if>
+            <if test="businessType != null and businessType != ''">
+                and business_type like '%${businessType}%'
+            </if>
+            <if test="businessType != null and businessType != ''">
+                and business_type like '%${businessType}%'
+            </if>
+            <if test="timeFrom != null">
+                and order_date &gt;= '${timeFrom}'
+            </if>
+            <if test="timeTo != null">
+                and order_date &lt;= '${timeTo}'
+            </if>
+            <if test="orderAction != null and orderAction !=''">
+                and order_action like '%${orderAction}%'
+            </if>
+            <if test="orderStatus != null and orderStatus !=''">
+                and order_status like '%${orderStatus}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="findCustomerById" parameterType="Long" resultType="com.shangma.entity.sale.b2c.Customer">
+        select * from t_b2c_customer where id=#{id}
+    </select>
+
+    <select id="findOrderGoods" parameterType="Long" resultType="com.shangma.entity.sale.b2c.OrderGoods">
+        select * from t_b2c_order_goods where order_id = #{orderId}
+    </select>
+</mapper>
