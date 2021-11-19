@@ -1,6 +1,10 @@
 package com.shangma.controller.afterSales;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shangma.common.http.AxiosResult;
+import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.afterSales.AfterSalesInformation;
 import com.shangma.service.afterSales.AfterSalesService;
 import org.apache.poi.ss.usermodel.Cell;
@@ -28,15 +32,20 @@ public class AfterSalesController {
     @Autowired
     private AfterSalesService afterSalesService;
 
-    @GetMapping("findAllByPage")
-    public AxiosResult<List<AfterSalesInformation>> findAllByPage(Integer pageIndex, Integer pageSize) {
-        List<AfterSalesInformation> afterSalesInformations = afterSalesService.findAllByPage(pageIndex, pageSize);
-        if (afterSalesInformations != null){
-            return AxiosResult.success(afterSalesInformations);
+    @GetMapping("findAll")
+    public AxiosResult findAll(@RequestParam(defaultValue = "1") Integer pageIndex,
+                                                                  @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageIndex,pageSize);
+        List<AfterSalesInformation> afterSalesInformations = afterSalesService.list();
+        PageInfo<AfterSalesInformation> pageInfo = new PageInfo<>(afterSalesInformations);
+        long total = pageInfo.getTotal();
+        List<AfterSalesInformation> list = pageInfo.getList();
+        PageBean<AfterSalesInformation> pageBean = PageBean.initData(total, list);
+        if (pageBean != null){
+            return AxiosResult.success(pageBean);
         }else {
             return AxiosResult.error();
         }
-
     }
 
     @GetMapping("findById")
@@ -51,21 +60,33 @@ public class AfterSalesController {
     }
 
     @GetMapping("findByProducer")
-    public AxiosResult<List<AfterSalesInformation>> findByProducer(String producer) {
+    public AxiosResult findByProducer(String producer,@RequestParam(defaultValue = "1") Integer pageIndex,
+                                                                   @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageIndex,pageSize);
         List<AfterSalesInformation> afterSalesInformations = afterSalesService.findByProducer(producer);
-        if (afterSalesInformations!=null){
-            return AxiosResult.success(afterSalesInformations);
+        PageInfo<AfterSalesInformation> pageInfo = new PageInfo<>(afterSalesInformations);
+        long total = pageInfo.getTotal();
+        List<AfterSalesInformation> list = pageInfo.getList();
+        PageBean<AfterSalesInformation> pageBean = PageBean.initData(total, list);
+        if (pageBean!=null){
+            return AxiosResult.success(pageBean);
         }else {
             return AxiosResult.error();
         }
     }
     @GetMapping("findByProduceTime")
-    public AxiosResult<List<AfterSalesInformation>> findByProduceTime(@RequestParam(value = "startTime",required = false) long startTime,
-                                                                      @RequestParam(value = "endTime",required = false) long endTime) {
-
+    public AxiosResult findByProduceTime(@RequestParam(value = "startTime",required = false) long startTime,
+                                                                      @RequestParam(value = "endTime",required = false) long endTime,
+                                         @RequestParam(defaultValue = "1") Integer pageIndex,@RequestParam(defaultValue = "10") Integer pageSize
+    ) {
+        PageHelper.startPage(pageIndex,pageSize);
         List<AfterSalesInformation> afterSalesInformations = afterSalesService.findByProduceTime(startTime, endTime);
-        if (afterSalesInformations!=null){
-            return AxiosResult.success(afterSalesInformations);
+        PageInfo<AfterSalesInformation> pageInfo = new PageInfo<>(afterSalesInformations);
+        long total = pageInfo.getTotal();
+        List<AfterSalesInformation> list = pageInfo.getList();
+        PageBean<AfterSalesInformation> data = PageBean.initData(total, list);
+        if (data!=null){
+            return AxiosResult.success(data);
         }else {
             return AxiosResult.error();
         }
@@ -135,8 +156,6 @@ public class AfterSalesController {
             String temp =status==0?"未审核":
                     (status==1?"已审核":"审核未通过");
             approveStatusCell.setCellValue(temp);
-            System.out.println(temp);
-
         }
         //把Excel文件写进内存
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

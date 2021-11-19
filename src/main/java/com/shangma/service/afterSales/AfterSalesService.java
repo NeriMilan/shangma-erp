@@ -41,5 +41,11 @@ public interface AfterSalesService {
      */
     int update(AfterSalesInformation afterSalesInformation);
 
+    /**
+     * 根据商品id找到商品后放到退货表中
+     * @param id
+     * @return
+     */
+    int returnable(Long id);
 
 }

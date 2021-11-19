@@ -3,7 +3,9 @@ package com.shangma.service.afterSales.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.shangma.entity.afterSales.AfterSalesInformation;
+import com.shangma.entity.sale.b2c.OrderGoods;
 import com.shangma.mapper.afterSales.AfterSalesMapper;
+import com.shangma.mapper.sale.b2c.OrderMapper;
 import com.shangma.service.afterSales.AfterSalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class AfterSalesServiceImpl implements AfterSalesService {
 
     @Autowired
     private AfterSalesMapper afterSalesMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
     @Override
     public List<AfterSalesInformation> list() {
@@ -62,6 +66,15 @@ public class AfterSalesServiceImpl implements AfterSalesService {
     @Override
     public int update(AfterSalesInformation afterSalesInformation) {
         return afterSalesMapper.updateById(afterSalesInformation);
+    }
+
+
+    @Override
+    public int returnable(Long id) {
+
+
+
+        return 0;
     }
 
 

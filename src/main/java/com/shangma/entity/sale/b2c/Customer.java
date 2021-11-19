@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class Customer {
 
   @TableId(type = IdType.AUTO)
-  private long id;
+  private Long id;
   private String customerName;
   private String customerAccount;
   private String customerPhone;
@@ -22,9 +23,10 @@ public class Customer {
   private String customerAddress;
   private String customerArea;
   private String distributionMode;
-  private double distributionCost;
+  private Double distributionCost;
   private String customerPayway;
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   private LocalDateTime takeTheirTime;
   private String customerEmail;
   private String remitter;
