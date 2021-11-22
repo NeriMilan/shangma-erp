@@ -9,6 +9,8 @@ import lombok.Data;
 @TableName("t_free_goods")
 public class FreeGoods extends BaseEntity {
 
+    private Long goodsPid;
+
     private String goodsName;
 
     private Long typeId;
