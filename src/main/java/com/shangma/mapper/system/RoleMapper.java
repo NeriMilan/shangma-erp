@@ -1,11 +1,19 @@
 package com.shangma.mapper.system;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.Role;
 import com.shangma.entity.system.RoleExample;
 import java.util.List;
+
+import com.shangma.entity.system.vo.RoleVO;
 import org.apache.ibatis.annotations.Param;
 
-public interface RoleMapper {
+public interface RoleMapper extends BaseMapper<Role> {
+
+    RoleVO selectVoById(Long id);
+
+    List<RoleVO> condition(RoleVO roleVO);
+
     long countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);
@@ -27,4 +35,5 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
 }

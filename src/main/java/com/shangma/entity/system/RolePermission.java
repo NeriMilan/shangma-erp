@@ -1,9 +1,23 @@
 package com.shangma.entity.system;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("t_system_role_permission")
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RolePermission {
+
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Long roleId;

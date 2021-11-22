@@ -13,6 +13,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="remark1" jdbcType="VARCHAR" property="remark1" />
     <result column="remark2" jdbcType="VARCHAR" property="remark2" />
     <result column="remark3" jdbcType="VARCHAR" property="remark3" />
@@ -85,9 +86,43 @@
   </sql>
   <sql id="Base_Column_List">
     id, login_name, username, password, department_id, sex, status, job_id, phone, email, 
-    ip, remark1, remark2, remark3, remark4, remark5, create_time, create_id, update_time, 
-    update_id, ext1, ext2
+    ip, role_id, remark1, remark2, remark3, remark4, remark5, create_time, create_id, 
+    update_time, update_id, ext1, ext2
   </sql>
+
+<!--  自定义区域start =======================================-->
+<!--      List<User> condition(User user);  -->
+  <select id="condition" parameterType="com.shangma.entity.system.User" resultType="com.shangma.entity.system.User">
+    select <include refid="Base_Column_List"/> from t_system_user
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+        <if test="departmentId != null">
+        department_id = #{departmentId}
+        </if>
+        <if test="status != null">
+          and status = #{status}
+        </if>
+        <if test="jobId != null">
+          and job_id = #{jobId}
+        </if>
+        <if test="roleId != null">
+          and role_id = #{roleId}
+        </if>
+        <if test="username != null">
+          and username like concat('%', #{username}, '%')
+        </if>
+        <if test="loginName != null">
+          and login_name like concat('%', #{loginName}, '%')
+        </if>
+        <if test="sex != null">
+          and sex like #{sex}
+        </if>
+    </trim>
+    group by id
+
+  </select>
+
+<!--  自定义区域end =======================================-->
+
   <select id="selectByExample" parameterType="com.shangma.entity.system.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -122,7 +157,7 @@
     insert into t_system_user (id, login_name, username, 
       password, department_id, sex, 
       status, job_id, phone, 
-      email, ip, remark1, 
+      email, ip, role_id, remark1, 
       remark2, remark3, remark4, 
       remark5, create_time, create_id, 
       update_time, update_id, ext1, 
@@ -130,7 +165,7 @@
     values (#{id,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{sex,jdbcType=BIGINT}, 
       #{status,jdbcType=BIGINT}, #{jobId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT}, #{remark1,jdbcType=VARCHAR}, 
       #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR}, #{remark4,jdbcType=VARCHAR}, 
       #{remark5,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, #{ext1,jdbcType=VARCHAR}, 
@@ -171,6 +206,9 @@
       </if>
       <if test="ip != null">
         ip,
+      </if>
+      <if test="roleId != null">
+        role_id,
       </if>
       <if test="remark1 != null">
         remark1,
@@ -239,6 +277,9 @@
       </if>
       <if test="ip != null">
         #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
       </if>
       <if test="remark1 != null">
         #{remark1,jdbcType=VARCHAR},
@@ -317,6 +358,9 @@
       <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=BIGINT},
+      </if>
       <if test="record.remark1 != null">
         remark1 = #{record.remark1,jdbcType=VARCHAR},
       </if>
@@ -368,6 +412,7 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       ip = #{record.ip,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=BIGINT},
       remark1 = #{record.remark1,jdbcType=VARCHAR},
       remark2 = #{record.remark2,jdbcType=VARCHAR},
       remark3 = #{record.remark3,jdbcType=VARCHAR},
@@ -415,6 +460,9 @@
       </if>
       <if test="ip != null">
         ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
       </if>
       <if test="remark1 != null">
         remark1 = #{remark1,jdbcType=VARCHAR},
@@ -464,6 +512,7 @@
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=BIGINT},
       remark1 = #{remark1,jdbcType=VARCHAR},
       remark2 = #{remark2,jdbcType=VARCHAR},
       remark3 = #{remark3,jdbcType=VARCHAR},

@@ -1,11 +1,12 @@
 package com.shangma.mapper.system;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.UserRole;
 import com.shangma.entity.system.UserRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserRoleMapper {
+public interface UserRoleMapper extends BaseMapper<UserRole> {
     long countByExample(UserRoleExample example);
 
     int deleteByExample(UserRoleExample example);
