@@ -13,7 +13,7 @@ public interface BaseService<T> {
      * 基类中有增删改查四个功能
      * 条件分页查询
      */
-    Integer updateBatchIds(List<Long> ids);
+    List<T> findAll();
     T findById(long id);
     Integer insert(T t);
     Integer update(T t);

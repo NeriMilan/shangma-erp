@@ -1,6 +1,7 @@
 package com.shangma.entity.sale.cart;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.shangma.entity.goods.Goods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

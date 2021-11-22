@@ -3,11 +3,13 @@ package com.shangma.service.sale.cart.impl;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shangma.entity.goods.Goods;
 import com.shangma.entity.sale.b2c.InternetSaleOrder;
 import com.shangma.entity.sale.b2c.OrderGoods;
 import com.shangma.entity.sale.cart.Cart;
 import com.shangma.entity.sale.cart.CartItem;
 import com.shangma.entity.sale.cart.ReceiveEntity;
+import com.shangma.mapper.goods.GoodsMapper;
 import com.shangma.mapper.sale.b2c.OnlineOrderMapper;
 import com.shangma.mapper.sale.b2c.OrderGoodsMapper;
 import com.shangma.mapper.sale.b2c.OrderMapper;
@@ -35,6 +37,8 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
     private OnlineOrderMapper onlineOrderMapper;
     @Autowired
     private OrderGoodsMapper orderGoodsMapper;
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     public CartItem queryByGoodId(long id) {
@@ -85,8 +89,12 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
         cartItems.forEach((cartItem1) ->{
             orderGoods.setOrderId(orderId);
             orderGoods.setGoodId(cartItem1.getGoodId());
-            //查询每个商品的信息
-            orderGoods.set
+            Goods goods = goodsMapper.selectById(cartItem1.getGoodId());
+            orderGoods.setGoodName(goods.getGoodsName());
+            orderGoods.setGoodPrice(goods.getMarketPrice());
+            orderGoods.setGoodCount((long)cartItem1.getGoodNum());
+            orderGoods.setTotalAmount(orderGoods.getGoodPrice()*orderGoods.getGoodCount());
+            orderGoodsMapper.insert(orderGoods);
         });
         return update;
     }

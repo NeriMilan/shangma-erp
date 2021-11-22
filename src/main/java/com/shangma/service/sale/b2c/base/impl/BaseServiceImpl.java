@@ -18,9 +18,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     private MyMapper<T> myMapper;
 
     @Override
-    public Integer updateBatchIds(List<Long> ids) {
-        return null;
+    public List<T> findAll() {
+        return myMapper.selectList(null);
     }
+
 
     @Override
     public T findById(long id) {
