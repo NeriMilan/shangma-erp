@@ -9,13 +9,10 @@ import com.shangma.entity.sale.b2c.Customer;
 import com.shangma.entity.sale.b2c.OrderGoods;
 import com.shangma.entity.sale.b2c.SalesOrder;
 import com.shangma.service.sale.b2c.OrderService;
-import lombok.extern.log4j.Log4j;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.mybatis.generator.logging.Log4jImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +20,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import redis.clients.jedis.JedisPool;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +47,8 @@ import java.util.List;
 @RestController
 @RequestMapping("order")
 public class OrderController {
+    @Autowired
+    private JedisPool jedisPool;
     @Autowired
     private OrderService orderService;
     @Autowired
