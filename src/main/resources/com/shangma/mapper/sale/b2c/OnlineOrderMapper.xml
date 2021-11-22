@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.sale.b2c.OnlineOrderMapper">
+    <select id="findAll" resultType="com.shangma.entity.sale.b2c.InternetSaleOrder">
+        SELECT order_id,shop_type,business_type,payment,distribution_mode,order_status
+         from t_b2c_internet_sale_order
+    </select>
+</mapper>
