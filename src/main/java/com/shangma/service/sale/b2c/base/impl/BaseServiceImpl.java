@@ -1,9 +1,12 @@
 package com.shangma.service.sale.b2c.base.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shangma.mapper.base.MyMapper;
 import com.shangma.service.sale.b2c.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,9 +16,10 @@ import java.util.List;
 public class BaseServiceImpl<T> implements BaseService<T> {
     @Autowired
     private MyMapper<T> myMapper;
+
     @Override
-    public List<T> findAll() {
-        return myMapper.selectList(null);
+    public Integer updateBatchIds(List<Long> ids) {
+        return null;
     }
 
     @Override
@@ -29,6 +33,14 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public PageInfo<T> searchPages(int pageNum, int pageSize, QueryWrapper<T> queryWrapper) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<T> list = myMapper.selectList(queryWrapper);
+        PageInfo<T> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
     public Integer insert(T t) {
         return myMapper.insert(t);
     }
@@ -38,8 +50,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         return myMapper.updateById(t);
     }
 
+    @Transactional
     @Override
-    public Integer delete(long id) {
-        return myMapper.deleteById(id);
+    public Integer deleteBatchIds(List<Long> ids) {
+        return  myMapper.deleteBatchIds(ids);
     }
 }

@@ -23,7 +23,7 @@ public class InternetSaleOrder {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime orderDate;
   private long customerId;
-  private String exportStatus;
+  private Character exportStatus;
   private String shopType;
 
 }

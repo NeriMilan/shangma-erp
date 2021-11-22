@@ -14,7 +14,6 @@ spring:
     password: "0000"  # yaml类型默认数值计算, 需要引号
 
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*.xml # 此即为默认值
   configuration:
     map-underscore-to-camel-case: true
 
