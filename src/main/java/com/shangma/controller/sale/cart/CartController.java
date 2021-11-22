@@ -5,10 +5,12 @@ import com.shangma.common.http.AxiosResult;
 import com.shangma.entity.sale.cart.Cart;
 import com.shangma.entity.sale.cart.CartItem;
 import com.shangma.entity.sale.cart.ReceiveEntity;
+import com.shangma.entity.system.User;
 import com.shangma.service.sale.cart.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,21 +28,18 @@ public class CartController {
     private CartService cartService;
     private Integer row;
     @GetMapping("query")
-    public AxiosResult<PageInfo> query(@RequestBody ReceiveEntity receiveEntity){
-
+    public AxiosResult<PageInfo> query(@RequestBody ReceiveEntity receiveEntity, HttpServletRequest request){
+        User user =(User) request.getSession().getAttribute("user");
+        receiveEntity.setUserId(user.getId());
         return AxiosResult.success(cartService.queryCart(receiveEntity));
     }
-//    @GetMapping("queryByGoodId")
-//    public CartItem queryByGoodId(Long id){
-//
-//        return cartService.queryByGoodId(id);
-//
-//    }
-    @PostMapping("add/{goodId}{userId}")
-    public AxiosResult add(Long goodId,Long userId){
 
+    @PostMapping("add/{goodId}")
+    public AxiosResult add(Long goodId,HttpServletRequest request){
+
+        User user =(User) request.getSession().getAttribute("user");
         //根据用户ID得到购物车ID，设为购物车项中购物车ID
-        Cart cart = cartService.queryByUserId(userId);
+        Cart cart = cartService.queryByUserId(user.getId());
         CartItem cartItem=cartService.queryByGoodId(goodId);
         if (cartItem==null){
             CartItem cartItemNew=new CartItem();
@@ -77,9 +76,10 @@ public class CartController {
      * @param cartItemIds
      * @return
      */
-    @GetMapping("pay/{cartItemIds}{userId}")
-    public AxiosResult pay(List<Long> cartItemIds,long userId){
-        Integer row = cartService.pay(cartItemIds,userId);
+    @GetMapping("pay/{cartItemIds}")
+    public AxiosResult pay(List<Long> cartItemIds,HttpServletRequest request){
+        User user =(User) request.getSession().getAttribute("user");
+        Integer row = cartService.pay(cartItemIds,user.getId());
         return row>0?AxiosResult.success():AxiosResult.error();
     }
 }
