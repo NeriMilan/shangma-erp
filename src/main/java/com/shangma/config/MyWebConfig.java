@@ -15,8 +15,8 @@ public class MyWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CheckPermissionInterceptor())
-                .addPathPatterns("/**")  //所有请求都被拦截包括静态资源
-                .excludePathPatterns("/","/login","/css/**","/fonts/**","/images/**","/js/**");
+//        registry.addInterceptor(new CheckPermissionInterceptor())
+//                .addPathPatterns("/**")  //所有请求都被拦截包括静态资源
+//                .excludePathPatterns("/","/login","/css/**","/fonts/**","/images/**","/js/**");
     }
 }

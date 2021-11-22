@@ -48,6 +48,7 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
 
     @Override
     public PageInfo<CartItem> queryCart(ReceiveEntity receiveEntity) {
+
         PageHelper.startPage(receiveEntity.getPageNum(),receiveEntity.getPageSize());
         List<CartItem> cartItems = cartMapper.selectCart(receiveEntity);
         PageInfo<CartItem> cartItemPageInfo = new PageInfo<>(cartItems);
