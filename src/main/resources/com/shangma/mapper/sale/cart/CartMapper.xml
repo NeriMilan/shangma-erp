@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.sale.cart.CartMapper">
+    <select id="selectByGoodId" resultType="com.shangma.entity.sale.cart.CartItem">
+        select * from t_cartitem where good_id=#{id}
+    </select>
+
+    <select id="selectByUserId" resultType="com.shangma.entity.sale.cart.Cart">
+        select * from t_cart where user_id=#{id}
+    </select>
+
+    <resultMap id="CartItem" type="com.shangma.entity.sale.cart.CartItem" autoMapping="true">
+        <id  property="id" column="id"></id>
+<!--        <collection property="cartItemList" ofType="com.shangma.entity.sale.cart.CartItem" autoMapping="true">-->
+<!--            <id property="id" column="id"></id>-->
+            <association property="goods" javaType="com.shangma.entity.goods.Goods" autoMapping="true">
+                <id property="id" column="id"></id>
+            </association>
+<!--        </collection>-->
+    </resultMap>
+    <select id="selectCart" resultMap="CartItem">
+        select b.id,b.good_num,b.item_status,c.id,c.goods_name,c.goods_color,c.goods_model,c.market_price from   t_cartitem b, t_goods c
+        where b.good_id=c.id and b.cart_id=(select id from t_cart where user_id=#{userId})
+        <if test="startTime!=null and startTime!=''">
+            and b.create_time &gt; #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            and b.create_time &lt; #{endTime}
+        </if>
+        <if test="goodName!=null and goodName!=''">
+            and c.goods_name like '%${goodName}%'
+        </if>
+        <if test="itemStatus!=null and itemStatus!=''">
+            and b.item_status= #{itemStatus}
+        </if>
+    </select>
+</mapper>

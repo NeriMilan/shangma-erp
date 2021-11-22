@@ -1,6 +1,7 @@
 package com.shangma.service.sale.b2c.base;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -14,8 +15,9 @@ public interface BaseService<T> {
      */
     List<T> findAll();
     T findById(long id);
-    List<T> search(QueryWrapper<T> queryWrapper);
     Integer insert(T t);
     Integer update(T t);
-    Integer delete(long id);
+    Integer deleteBatchIds(List<Long> ids);
+    List<T> search(QueryWrapper<T> queryWrapper);
+    PageInfo<T> searchPages(int pageNum, int pageSize, QueryWrapper<T> queryWrapper);
 }
