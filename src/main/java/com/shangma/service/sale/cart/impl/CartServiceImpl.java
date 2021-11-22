@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shangma.entity.sale.b2c.InternetSaleOrder;
+import com.shangma.entity.sale.b2c.OrderGoods;
 import com.shangma.entity.sale.cart.Cart;
 import com.shangma.entity.sale.cart.CartItem;
 import com.shangma.entity.sale.cart.ReceiveEntity;
+import com.shangma.mapper.sale.b2c.OnlineOrderMapper;
+import com.shangma.mapper.sale.b2c.OrderGoodsMapper;
 import com.shangma.mapper.sale.b2c.OrderMapper;
 import com.shangma.mapper.sale.cart.CartMapper;
 import com.shangma.service.sale.b2c.base.impl.BaseServiceImpl;
@@ -29,7 +32,9 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
     @Autowired
     private CartMapper cartMapper;
     @Autowired
-    private OrderMapper orderMapper;
+    private OnlineOrderMapper onlineOrderMapper;
+    @Autowired
+    private OrderGoodsMapper orderGoodsMapper;
 
     @Override
     public CartItem queryByGoodId(long id) {
@@ -73,8 +78,16 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
         internetSaleOrder.setCustomerId(userId);
         internetSaleOrder.setExportStatus('0');
         internetSaleOrder.setShopType("淘宝订单");
-        orderMapper.insert(internetSaleOrder)
-
+        onlineOrderMapper.insert(internetSaleOrder);
+        Long orderId = internetSaleOrder.getOrderId();
+        OrderGoods orderGoods=new OrderGoods();
+        List<CartItem> cartItems = cartMapper.selectBatchIds(cartItemIds);
+        cartItems.forEach((cartItem1) ->{
+            orderGoods.setOrderId(orderId);
+            orderGoods.setGoodId(cartItem1.getGoodId());
+            //查询每个商品的信息
+            orderGoods.set
+        });
         return update;
     }
 }
