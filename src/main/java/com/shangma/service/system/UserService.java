@@ -2,6 +2,7 @@ package com.shangma.service.system;
 
 import com.shangma.entity.system.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -11,6 +12,20 @@ import java.util.List;
  */
 public interface UserService {
 
-    public List<User> list();
+    List<User> list();
+
+    List<User> condition(User user);
+
+    User getById(Long id);
+
+    boolean removeById(Long id, User master);
+
+    boolean updateById(User user, User master);
+
+    boolean add(User user, User master);
+
+    List<User> listByLoginNameAndPassword(String loginName, String password);
+
+    boolean flushUpdate(Long id, User master);
 
 }

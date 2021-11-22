@@ -826,6 +826,66 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoleIdIsNull() {
+            addCriterion("role_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdIsNotNull() {
+            addCriterion("role_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdEqualTo(Long value) {
+            addCriterion("role_id =", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdNotEqualTo(Long value) {
+            addCriterion("role_id <>", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdGreaterThan(Long value) {
+            addCriterion("role_id >", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("role_id >=", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdLessThan(Long value) {
+            addCriterion("role_id <", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdLessThanOrEqualTo(Long value) {
+            addCriterion("role_id <=", value, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdIn(List<Long> values) {
+            addCriterion("role_id in", values, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdNotIn(List<Long> values) {
+            addCriterion("role_id not in", values, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdBetween(Long value1, Long value2) {
+            addCriterion("role_id between", value1, value2, "roleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleIdNotBetween(Long value1, Long value2) {
+            addCriterion("role_id not between", value1, value2, "roleId");
+            return (Criteria) this;
+        }
+
         public Criteria andRemark1IsNull() {
             addCriterion("remark1 is null");
             return (Criteria) this;
@@ -1186,32 +1246,32 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo (LocalDateTime value) {
+        public Criteria andCreateTimeEqualTo(Date value) {
             addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo (LocalDateTime value) {
+        public Criteria andCreateTimeNotEqualTo(Date value) {
             addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan (LocalDateTime value) {
+        public Criteria andCreateTimeGreaterThan(Date value) {
             addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo (LocalDateTime value) {
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan (LocalDateTime value) {
+        public Criteria andCreateTimeLessThan(Date value) {
             addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo (LocalDateTime value) {
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
             addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
@@ -1226,12 +1286,12 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween (LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andCreateTimeBetween(Date value1, LocalDateTime value2) {
             addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween (LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andCreateTimeNotBetween(Date value1, LocalDateTime value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
@@ -1306,32 +1366,32 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeEqualTo (LocalDateTime value) {
+        public Criteria andUpdateTimeEqualTo(Date value) {
             addCriterion("update_time =", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotEqualTo (LocalDateTime value) {
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
             addCriterion("update_time <>", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThan (LocalDateTime value) {
+        public Criteria andUpdateTimeGreaterThan(Date value) {
             addCriterion("update_time >", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThanOrEqualTo (LocalDateTime value) {
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("update_time >=", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThan (LocalDateTime value) {
+        public Criteria andUpdateTimeLessThan(Date value) {
             addCriterion("update_time <", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThanOrEqualTo (LocalDateTime value) {
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
             addCriterion("update_time <=", value, "updateTime");
             return (Criteria) this;
         }
@@ -1346,12 +1406,12 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeBetween (LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andUpdateTimeBetween(Date value1, LocalDateTime value2) {
             addCriterion("update_time between", value1, value2, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotBetween (LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andUpdateTimeNotBetween(Date value1, LocalDateTime value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }

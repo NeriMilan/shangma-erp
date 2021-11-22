@@ -1,11 +1,15 @@
 package com.shangma.mapper.system;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.User;
 import com.shangma.entity.system.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
+
+    List<User> condition(User user);
+
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

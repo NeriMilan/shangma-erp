@@ -1,5 +1,6 @@
 package com.shangma.interceptor;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
  * @create : 2021-11-17 15:18
  * @Description :
  */
-
+@Component
 public class CheckPermissionInterceptor implements HandlerInterceptor {
 
     @Override

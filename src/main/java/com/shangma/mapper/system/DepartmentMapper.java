@@ -1,11 +1,12 @@
 package com.shangma.mapper.system;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.Department;
 import com.shangma.entity.system.DepartmentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface DepartmentMapper {
+public interface DepartmentMapper extends BaseMapper<Department> {
     long countByExample(DepartmentExample example);
 
     int deleteByExample(DepartmentExample example);
