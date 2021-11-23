@@ -1,8 +1,11 @@
 package com.shangma.entity.sale.cart;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -14,11 +17,14 @@ import java.time.LocalDateTime;
  * @Version: JDK1.8
  */
 @Data
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReceiveEntity {
-    private Integer pageNum;
-    private Integer pageSize;
+    @Builder.Default
+    private Integer pageNum=1;
+    @Builder.Default
+    private Integer pageSize=2;
     private Long userId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

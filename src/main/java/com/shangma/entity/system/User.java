@@ -1,14 +1,21 @@
 package com.shangma.entity.system;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("t_system_user")
 public class User {
+
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private String loginName;
@@ -30,6 +37,8 @@ public class User {
     private String email;
 
     private String ip;
+
+    private Long roleId;
 
     private String remark1;
 
@@ -53,5 +62,5 @@ public class User {
 
     private String ext2;
 
-
+    
 }

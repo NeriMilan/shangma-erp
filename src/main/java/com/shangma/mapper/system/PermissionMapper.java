@@ -1,11 +1,12 @@
 package com.shangma.mapper.system;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.Permission;
 import com.shangma.entity.system.PermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface PermissionMapper {
+public interface PermissionMapper extends BaseMapper<Permission> {
     long countByExample(PermissionExample example);
 
     int deleteByExample(PermissionExample example);
