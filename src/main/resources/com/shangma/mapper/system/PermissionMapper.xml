@@ -76,6 +76,52 @@
     id, name, description, status, operate, create_time, create_id, update_time, update_id, 
     ext1, ext2
   </sql>
+
+<!--  自定义 start =====================================-->
+
+<!--      PermissionVO selectVoById(Long id); -->
+  <select id="selectVoById" resultMap="ConditionPermissionVO">
+    select <include refid="Base_Column_List"/> from t_system_permission where id = #{id}
+  </select>
+
+<!--      List<PermissionVO> condition(PermissionVO permissionVO); -->
+  <resultMap id="ConditionPermissionVO" type="com.shangma.entity.system.vo.PermissionVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="operate" jdbcType="VARCHAR" property="operate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+
+    <association property="roleList" javaType="list" column="id" select="selectRole"/>
+  </resultMap>
+
+  <select id="selectRole" resultType="com.shangma.entity.system.Role">
+    select r.* from t_system_role r where r.id in(
+        select rp.role_id from t_system_role_permission rp where rp.permission_id = #{id}
+    )
+  </select>
+
+  <select id="condition" parameterType="com.shangma.entity.system.vo.PermissionVO" resultMap="ConditionPermissionVO">
+    select <include refid="Base_Column_List"/> from t_system_permission
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+        <if test="id != null">
+            id = #{id}
+        </if>
+        <if test="status != null">
+          and status = #{status}
+        </if>
+    </trim>
+    order by id
+  </select>
+
+<!--  自定义 end =====================================-->
+
   <select id="selectByExample" parameterType="com.shangma.entity.system.PermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

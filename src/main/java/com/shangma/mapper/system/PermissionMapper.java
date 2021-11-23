@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.system.Permission;
 import com.shangma.entity.system.PermissionExample;
 import java.util.List;
+
+import com.shangma.entity.system.vo.PermissionVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper extends BaseMapper<Permission> {
@@ -28,4 +30,8 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     int updateByPrimaryKeySelective(Permission record);
 
     int updateByPrimaryKey(Permission record);
+
+    List<PermissionVO> condition(PermissionVO permissionVO);
+
+    PermissionVO selectVoById(Long id);
 }

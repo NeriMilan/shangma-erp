@@ -32,6 +32,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        log.info("测试handler:{}",handler);
+        log.info("测试handler类型:{}",handler.getClass());
+
         response.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");

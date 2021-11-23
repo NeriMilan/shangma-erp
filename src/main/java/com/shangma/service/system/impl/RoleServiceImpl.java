@@ -65,10 +65,10 @@ public class RoleServiceImpl implements RoleService {
         for (RolePermission rolePermission : rolePermissionMapper.selectByExample(rolePermissionExample)) {
             rolePermission.setUpdateId(master.getId());
             rolePermissionMapper.updateById(rolePermission);
-            rolePermissionMapper.deleteByExample(rolePermissionExample);
         }
+        rolePermissionMapper.deleteByExample(rolePermissionExample);
 
-        return i == 1 ? true : false;
+        return i == 1;
     }
 
     //@Override

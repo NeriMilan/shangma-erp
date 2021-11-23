@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("t_system_permission")
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Permission {
 
     @TableId(type = IdType.AUTO)
@@ -36,6 +35,9 @@ public class Permission {
 
     private Long updateId;
 
+    /**
+        权限范围, 可执行操作描述
+     */
     private String ext1;
 
     private String ext2;
