@@ -22,9 +22,9 @@ public class CheckPermissionInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
 
-        System.out.println("拦截器");
-        System.out.println(session);
-        System.out.println(servletPath);
+//        System.out.println("拦截器");
+//        System.out.println(session);
+//        System.out.println(servletPath);
 
         return true;
     }
