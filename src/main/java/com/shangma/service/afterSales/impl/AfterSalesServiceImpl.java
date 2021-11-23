@@ -4,8 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.shangma.entity.afterSales.AfterSalesInformation;
 import com.shangma.entity.sale.b2c.OrderGoods;
+import com.shangma.entity.system.Permission;
+import com.shangma.entity.system.Role;
+import com.shangma.entity.system.User;
 import com.shangma.mapper.afterSales.AfterSalesMapper;
 import com.shangma.mapper.sale.b2c.OrderMapper;
+import com.shangma.mapper.system.PermissionMapper;
+import com.shangma.mapper.system.RoleMapper;
+import com.shangma.mapper.system.UserMapper;
 import com.shangma.service.afterSales.AfterSalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +25,8 @@ public class AfterSalesServiceImpl implements AfterSalesService {
     @Autowired
     private AfterSalesMapper afterSalesMapper;
     @Autowired
-    private OrderMapper orderMapper;
+    private PermissionMapper permissionMapper;
+
 
     @Override
     public List<AfterSalesInformation> list() {
@@ -69,12 +76,12 @@ public class AfterSalesServiceImpl implements AfterSalesService {
     }
 
 
+
     @Override
-    public int returnable(Long id) {
+    public int examine(AfterSalesInformation afterSalesInformation) {
+        afterSalesMapper.updateById(afterSalesInformation);
+        return afterSalesMapper.updateById(afterSalesInformation);
 
-
-
-        return 0;
     }
 
 

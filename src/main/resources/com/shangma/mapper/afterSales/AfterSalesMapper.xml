@@ -17,5 +17,11 @@
      </where>
 
   </select>
+<!--售后审核权限查询-->
+    <select id="selectPermission" resultType="com.shangma.entity.system.User">
+
+
+
+    </select>
 
 </mapper>

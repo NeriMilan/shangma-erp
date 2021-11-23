@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.shangma.common.http.AxiosResult;
 import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.afterSales.AfterSalesInformation;
+import com.shangma.entity.system.User;
 import com.shangma.service.afterSales.AfterSalesService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,10 +15,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -167,19 +171,25 @@ public class AfterSalesController {
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
         return responseEntity;
     }
-    @GetMapping("returnable")
-    public AxiosResult returnable(){
-        /**
-         * 1.查询出所有订单
-         * 2.根据订单id查询出该订单下的商品
-         * 3.根据商品id把商品信息添加到退货信息表中
-         * 4.修改退货商品信息表的值
-         */
+    /**
+     * 审核
+     * 先判定权限是否足够 然后修改审核状态
+     */
+    @GetMapping("examine")
+    public AxiosResult examine(HttpServletRequest httpRequest){
+        User user = null;
+        HttpSession session = httpRequest.getSession();
+        Object obj = session.getAttribute("user");
+        if (obj!=null){
+            user = (User) obj;
+        }
+        String loginName = user.getLoginName();
 
 
 
-
-        return AxiosResult.success();
+        return AxiosResult.error();
     }
+
+
 
 }

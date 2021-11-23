@@ -1,6 +1,9 @@
 package com.shangma.service.afterSales;
 
 import com.shangma.entity.afterSales.AfterSalesInformation;
+import com.shangma.entity.system.Permission;
+import com.shangma.entity.system.Role;
+import com.shangma.entity.system.User;
 
 import java.util.List;
 
@@ -42,10 +45,8 @@ public interface AfterSalesService {
     int update(AfterSalesInformation afterSalesInformation);
 
     /**
-     * 根据商品id找到商品后放到退货表中
-     * @param id
-     * @return
+     * 审核
+     * @param afterSalesInformation
      */
-    int returnable(Long id);
-
+    int examine(AfterSalesInformation afterSalesInformation);
 }

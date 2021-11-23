@@ -10,7 +10,7 @@ public class AfterSalesGoodsInformation {
 
     private String goodsName;
 
-    private String goodsBrand;
+    private String brandName;
 
     private String goodsModel;
 
