@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goodsMapper.GoodsMapper">
+    <update id="reduce">
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+                min_stocks= min_stocks - #{num}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <update id="plus">
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+                min_stocks= min_stocks + #{num}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="search" resultType="com.shangma.entity.goodsEntity.Goods">
+        select * from t_goods
+        <where>
+            <if test="goodsName !=null and goodsName!=''">
+                goodsName like "%${goodsName}%"
+            </if>
+            <if test="typePid !=null and typePid!=''">
+                and typePid like "%${typePid}%"
+            </if>
+            <if test="brandId !=null and brandId!=''">
+                and brandId like "%${brandId}%"
+            </if>
+            <if test="goodsColor !=null and goodsColor!=''">
+                and goodsColor like "%${goodsColor}%"
+            </if>
+            <if test="goodsModel !=null and goodsModel!=''">
+                and goodsModel like "%${goodsModel}%"
+            </if>
+            <if test="goodsKind !=null and goodsKind!=''">
+                and goodsKind like "%${goodsKind}%"
+            </if>
+        </where>
+    </select>
+</mapper>

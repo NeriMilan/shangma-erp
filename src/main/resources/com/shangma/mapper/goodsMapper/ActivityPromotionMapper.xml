@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goodsMapper.ActivityPromotionMapper">
+    <insert id="insert">
+        insert into t_activity_promotion
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityStart !=null and activityStart != '' ">
+                activity_start,
+            </if>
+            <if test="activityEnd !=null and activityEnd != '' ">
+                activity_end,
+            </if>
+            <if test="activityName !=null and activityName != '' ">
+                activity_name,
+            </if>
+            <if test="activityType != null activityType != '' ">
+                activity_type,
+            </if>
+            <if test="auditState != null auditState != '' ">
+                audit_state,
+            </if>
+            <if test="auditPeople !=null and auditPeople != '' ">
+                audit_people,
+            </if>
+            <if test="activityFile !=null and activityFile != '' ">
+                activity_file,
+            </if>
+            <if test="createBy !=null and createBy != '' ">
+                create_by,
+            </if>
+            <if test="createTime !=null and createTime != '' ">
+                create_time,
+            </if>
+            <if test="pId !=null and pId != '' ">
+                p_id,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityStart !=null and activityStart != '' ">
+                #{activityStart},
+            </if>
+            <if test="activityEnd !=null and activityEnd != '' ">
+                #{activityEnd},
+            </if>
+            <if test="activityName !=null and activityName != '' ">
+                #{activityName},
+            </if>
+            <if test="activityType != null activityType != '' ">
+                #{activityType},
+            </if>
+            <if test="auditState != null auditState != '' ">
+                #{auditState},
+            </if>
+            <if test="auditPeople !=null and auditPeople != '' ">
+                #{auditPeople},
+            </if>
+            <if test="activityFile !=null and activityFile != '' ">
+                #{activityFile},
+            </if>
+            <if test="createBy !=null and createBy != '' ">
+                #{createBy},
+            </if>
+            <if test="createTime !=null and createTime != '' ">
+                #{createTime},
+            </if>
+            <if test="pId !=null and pId != '' ">
+                #{pId},
+            </if>
+        </trim>
+    </insert>
+    <update id="reduce">
+
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+
+            </if>
+        </set>
+        where id=#{id}
+
+    </update>
+    <update id="update">
+        update t_activity_promotion
+        <set>
+            <if test="activityStart !=null">
+                activity_start=#{activityStart},
+            </if>
+            <if test="activityEnd !=null  ">
+                activity_end=#{activityEnd},
+            </if>
+            <if test="activityName !=null  ">
+                activity_name=#{activityName},
+            </if>
+            <if test="activityType != null  ">
+                activity_type=#{activityType},
+            </if>
+            <if test="auditState != null  ">
+                audit_state=#{auditState},
+            </if>
+            <if test="auditPeople !=null  ">
+                audit_people=#{auditPeople},
+            </if>
+            <if test="activityFile !=null  ">
+                activity_file=#{activityFile},
+            </if>
+            <if test="createBy !=null  ">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime !=null ">
+                create_time=#{createTime},
+            </if>
+            <if test="pId !=null  ">
+                p_id=#{pId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="search" resultMap="activityList">
+        select * from t_activity_promotion a,t_price_adjustment p on a.p_id = p.id
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                and goods_name like "%${goodsName}%"
+            </if>
+            <if test="auditStart != null and auditStart != ''">
+                and audit_state = #{auditStart}
+            </if>
+            <if test="activityStart != null and activityStart != ''">
+                and activity_start = #{activityStart}
+            </if>
+            <if test="priceStart != null and priceStart != ''">
+                and price_start = #{priceStart}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="activityList" type="com.shangma.entity.goodsEntity.ActivityPromotion">
+        <id property="id" column="id"/>
+        <result property="activityStart" column="activity_start"/>
+        <result property="activityEnd" column="activity_end"/>
+        <result property="activityName" column="activity_name"/>
+        <result property="activityType" column="activity_type"/>
+        <result property="auditState" column="audit_state"/>
+        <result property="auditPeople" column="audit_people"/>
+        <result property="activityFile" column="activity_file"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="pId" column="p_id"/>
+        <association property="priceAdjustment" javaType="com.shangma.entity.goodsEntity.PriceAdjustment">
+            <result property="goodsId" column="goods_id"/>
+            <result property="goodsName" column="goods_name"/>
+            <result property="goodsNum" column="goods_num"/>
+            <result property="marketBeforePrice" column="market_before_price"/>
+            <result property="shopBeforePrice" column="shop_before_price"/>
+            <result property="marketNowPrice" column="market_now_price"/>
+            <result property="shopNowPrice" column="shop_now_price"/>
+            <result property="activityPrice" column="activity_price"/>
+            <result property="discountNum" column="discount_num"/>
+            <result property="priceStart" column="price_start"/>
+            <result property="priceEnd" column="price_end"/>
+            <result property="activityReason" column="activity_reason"/>
+            <result property="approvalState" column="approval_state"/>
+        </association>
+    </resultMap>
+
+    <select id="select" resultMap="activityList">
+        SELECT a.*, p.*
+        FROM t_activity_promotion a,
+             t_price_adjustment p
+        WHERE a.p_id = p.id
+    </select>
+
+    <select id="selectById" resultMap="activityList">
+        SELECT *
+        FROM t_activity_promotion a,
+             t_price_adjustment p
+        WHERE a.id = #{id}
+    </select>
+</mapper>
