@@ -34,8 +34,10 @@ public class InternetSaleOrder {
   private Customer customer;
   //商品名称
   @TableField(exist = false)
-  private List<String> goodsNames;
-
+  private String goodsNames;
+  //用来接收前端用来查询的商品名称
+  @TableField(exist = false)
+  private String goodsName;
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   @TableField(exist = false)
