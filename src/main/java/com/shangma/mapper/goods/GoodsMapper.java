@@ -10,9 +10,5 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     /**
      * 多表分页查询
      */
-    List<Goods> getGoodsList(@Param("goodsName") String goodsName,
-                             @Param("goodsModel") String goodsModel,
-                             @Param("goodsColor") String goodsColor,
-                             @Param("brandId") Long brandId,
-                             @Param("typeId") Long typeId);
+    List<Goods> getGoodsList(Goods goods);
 }

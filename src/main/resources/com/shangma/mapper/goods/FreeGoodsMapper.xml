@@ -1,70 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shangma.mapper.goods.FreeGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.shangma.entity.goods.FreeGoods">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
-    <result column="type_id" jdbcType="BIGINT" property="typeId" />
-    <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
-    <result column="unit_price" jdbcType="DOUBLE" property="unitPrice" />
-    <result column="buy_price" jdbcType="DOUBLE" property="buyPrice" />
-    <result column="min_stocks" jdbcType="INTEGER" property="minStocks" />
-    <result column="goods_color" jdbcType="VARCHAR" property="goodsColor" />
-    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
-    <result column="create_by" jdbcType="BIGINT" property="createBy" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
-    <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, goods_name, type_id, goods_model, unit_price, buy_price, min_stocks, goods_color, 
+    <resultMap id="BaseResultMap" type="com.shangma.entity.goods.FreeGoods">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="type_id" jdbcType="BIGINT" property="typeId"/>
+        <result column="goods_model" jdbcType="VARCHAR" property="goodsModel"/>
+        <result column="unit_price" jdbcType="DOUBLE" property="unitPrice"/>
+        <result column="buy_price" jdbcType="DOUBLE" property="buyPrice"/>
+        <result column="min_stocks" jdbcType="INTEGER" property="minStocks"/>
+        <result column="goods_color" jdbcType="VARCHAR" property="goodsColor"/>
+        <result column="brand_id" jdbcType="BIGINT" property="brandId"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="goods_pid" property="brandName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , goods_name, type_id, goods_model, unit_price, buy_price, min_stocks, goods_color,
     brand_id, create_by, create_time, update_by, update_time
-  </sql>
-  <select id="getFreeGoodsList" resultMap="BaseResultMap">
-    SELECT
-    t_free_goods.id,
-    t_free_goods.type_id,
-    t_free_goods.brand_id,
-    t_free_goods.goods_model,
-    t_free_goods.goods_color,
-    t_free_goods.goods_name,
-    t_free_goods.unit_price,
-    t_free_goods.buy_price,
-    t_free_goods.min_stocks,
-    t_free_goods.id,
-    t_goods_type.type_name,
-    t_free_goods.id,
-    t_goods_brand.brand_name
-    FROM
-    t_free_goods
-    LEFT JOIN t_goods_type ON t_free_goods.type_id = t_goods_type.id LEFT JOIN t_goods_brand ON t_free_goods.brand_id =
-    t_goods_brand.id
-    <where>
-      <if test="goodsName != null and goodsName != ''">
-        AND t_free_goods.goods_name LIKE CONCAT('%', #{goodsName} ,'%')
-      </if>
-      <if test="goodsModel != null and goodsModel != ''">
-        AND t_free_goods.goods_model LIKE CONCAT('%', #{goodsModel} ,'%')
-      </if>
-      <if test="goodsColor != null and goodsColor != ''">
-        AND t_free_goods.goods_color LIKE CONCAT('%', #{goodsColor} ,'%')
-      </if>
-      <if test="typeId != null and typeId != -1">
-        AND
-        (
-        t_free_goods.type_id = #{typeId} OR
-        t_free_goods.id = #{typeId}
-        )
-      </if>
-      <if test="brandId != null and brandId != -1">
-        AND
-        (
-        t_free_goods.brand_id = #{brandId} OR
-        t_free_goods.id = #{brandId}
-        )
-      </if>
-    </where>
-  </select>
+    </sql>
+    <select id="getFreeGoodsList" resultMap="BaseResultMap">
+        SELECT
+        t_free_goods.id,
+        t_free_goods.goods_pid
+        t_free_goods.type_id,
+        t_free_goods.brand_id,
+        t_free_goods.goods_model,
+        t_free_goods.goods_color,
+        t_free_goods.goods_name,
+        t_free_goods.unit_price,
+        t_free_goods.buy_price,
+        t_free_goods.min_stocks,
+        t_free_goods.id,
+        t_goods_type.type_name,
+        t_free_goods.id,
+        t_goods_brand.brand_name
+        FROM
+        t_free_goods
+        LEFT JOIN t_goods_type ON t_free_goods.type_id = t_goods_type.id LEFT JOIN t_goods_brand ON
+        t_free_goods.brand_id =
+        t_goods_brand.id
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                AND t_free_goods.goods_name LIKE CONCAT('%', #{goodsName} ,'%')
+            </if>
+            <if test="goodsModel != null and goodsModel != ''">
+                AND t_free_goods.goods_model LIKE CONCAT('%', #{goodsModel} ,'%')
+            </if>
+            <if test="goodsColor != null and goodsColor != ''">
+                AND t_free_goods.goods_color LIKE CONCAT('%', #{goodsColor} ,'%')
+            </if>
+            <if test="typeId != null and typeId != -1">
+                AND
+                (
+                t_free_goods.type_id = #{typeId} OR
+                t_free_goods.id = #{typeId}
+                )
+            </if>
+            <if test="brandId != null and brandId != -1">
+                AND
+                (
+                t_free_goods.brand_id = #{brandId} OR
+                t_free_goods.id = #{brandId}
+                )
+            </if>
+        </where>
+    </select>
+    <update id="freeToGoods" parameterType="com.shangma.entity.goods.FreeGoods">
+        update t_free_goods
+            INNER JOIN t_goods
+        ON t_free_goods.goods_pid = t_goods.id
+            set t_free_goods.min_stocks =t_free_goods.min_stocks - #{addStocks},
+                t_goods.min_stocks=t_goods.min_stocks + #{addStocks},
+                t_goods.shop_price=#{shopPrice}
+        where t_free_goods.id = #{id}
+    </update>
+    <update id="goodsToFree" parameterType="com.shangma.entity.goods.FreeGoods">
+        update t_free_goods
+            INNER JOIN t_goods
+        ON t_free_goods.goods_pid = t_goods.id
+            set t_free_goods.min_stocks =t_free_goods.min_stocks + #{addStocks},
+                t_goods.min_stocks=t_goods.min_stocks - #{addStocks},
+        where t_goods.id = #{id}
+    </update>
+<!--    <insert id="insertGoodsCheck" parameterType="com.shangma.entity.GoodsCheck">-->
+<!--        insert into t_goods_check (free_id, shop_price,-->
+<!--                                   change_stocks, goods_state, check_opinions,-->
+<!--                                   check_by)-->
+<!--        values (#{freeId,jdbcType=BIGINT}, #{shopPrice,jdbcType=DOUBLE},-->
+<!--                #{changeStocks,jdbcType=INTEGER}, 0, #{checkOpinions,jdbcType=VARCHAR},-->
+<!--                #{checkBy,jdbcType=BIGINT})-->
+<!--    </insert>-->
+<!--    <update id="freeToGoodsState" parameterType="com.shangma.entity.GoodsCheck">-->
+<!--        update t_goods_check-->
+<!--        set goods_state = #{goodsState,jdbcType=INTEGER}-->
+<!--        where t_goods_check.id = #{id}-->
+<!--    </update>-->
+
+
+
 </mapper>
