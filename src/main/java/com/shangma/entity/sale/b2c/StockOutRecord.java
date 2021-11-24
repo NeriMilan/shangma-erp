@@ -15,8 +15,8 @@ import java.util.List;
 @Data
 @TableName("t_b2c_stock_out_record")
 public class StockOutRecord {
-  private Long id;
   @TableId(type = IdType.AUTO)
+  private Long id;
   private Long orderId;
   private String orderType;
   private String orderAction;

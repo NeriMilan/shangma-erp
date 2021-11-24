@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-
 /**
  * @CreateTime: 2021/11/18  19:39
  */
@@ -29,4 +28,5 @@ public class SaleConfig {
         JedisPool jedisPool = new JedisPool(jedisPoolConfig(), "localhost", 6379);
         return jedisPool;
     }
+
 }

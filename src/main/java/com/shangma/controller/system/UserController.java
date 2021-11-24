@@ -46,6 +46,7 @@ public class UserController {
     @RequestMapping("/login/{loginName}/{password}")
     public AxiosResult login(@PathVariable String loginName, @PathVariable String password, HttpServletRequest request) {
 
+
         List<User> list = userService.listByLoginNameAndPassword(loginName, password);
 
         if (list != null && list.size() == 1) {

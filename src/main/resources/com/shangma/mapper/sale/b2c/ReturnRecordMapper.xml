@@ -2,32 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
-<!--
- 添加的内容如下
--->
-
-<!--
- namespace 表示命名空间 对sql的操作进行分类化管理  有点类似包管理
--->
-<mapper namespace="com.shangma.mapper.sale.b2c.OrderMapper">
-
-    <!--是根据id查询用户
-    select标签表示查询
-          id属性： 要求在一个namespace当中唯一 id随意写 但是要唯一
-          parameterType表示参数的java类型
-          resultType  表示查询后的返回值java类型
-          #{id}  表示占位符  传过来是什么  id就等于什么  如果是基本数据类型 这个id可以随意写
-          com.shangma.entity.sale.b2c.SalesOrder
-    -->
-    <resultMap id="mapper01" type="com.shangma.entity.sale.b2c.SalesOrder">
-        <id property="id" column="id"/>
-    </resultMap>
-    <select id="findBySearch" parameterType="com.shangma.entity.sale.b2c.SalesOrder"  resultMap="mapper01">
-        select * from t_b2c_sales_order
+<mapper namespace="com.shangma.mapper.sale.b2c.ReturnRecordMapper">
+    <select id="findAllOrder" resultType="com.shangma.entity.sale.b2c.ReturnEntityRecord">
+        select * from t_b2c_sales_return_entity_record
+    </select>
+    <select id="search" parameterType="com.shangma.entity.sale.b2c.ReturnEntityRecord" resultType="com.shangma.entity.sale.b2c.ReturnEntityRecord">
+        select * from t_b2c_sales_return_entity_record
         <where>
-            <if test="orderId!=null and orderId!=''">
+            <if test="orderId != null and orderId != ''">
                 order_id like '%${orderId}%'
             </if>
             <if test="orderType != null and orderType != ''">
@@ -53,12 +35,13 @@
             </if>
         </where>
     </select>
-
-    <select id="findCustomerById" parameterType="Long" resultType="com.shangma.entity.sale.b2c.Customer">
+    <select id="findByOrderId" parameterType="Long" resultType="com.shangma.entity.sale.b2c.ReturnEntityRecord">
+        select * from t_b2c_sales_return_entity_record where order_id = #{orderId}
+    </select>
+    <select id="findCustomer" parameterType="Long" resultType="com.shangma.entity.sale.b2c.Customer">
         select * from t_b2c_customer where id=#{id}
     </select>
-
-    <select id="findOrderGoods" parameterType="Long" resultType="com.shangma.entity.sale.b2c.OrderGoods">
+    <select id="findGoods" parameterType="Long" resultType="com.shangma.entity.sale.b2c.OrderGoods">
         select * from t_b2c_order_goods where order_id = #{orderId}
     </select>
 </mapper>
