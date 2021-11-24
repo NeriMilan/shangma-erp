@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shangma.mapper.afterSales.AfterSalesGoodsMapper">
+    <select id="findByOrderId" resultType="com.shangma.entity.afterSales.AfterSalesGoodsInformation">
+        SELECT t1.id,t1.goods_name,t2.brand_name,t1.goods_model,t1.goods_color,t3.order_id,
+        t3.good_price,t3.good_count,t3.total_amount
+        FROM t_goods t1,t_goods_brand t2,t_b2c_order_goods t3
+        WHERE t3.good_id=t1.id and t1.brand_id = t2.id and t3.order_id = #{id}
+    </select>
+
+
+</mapper>
