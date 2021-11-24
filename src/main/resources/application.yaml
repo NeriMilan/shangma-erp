@@ -26,6 +26,9 @@ pagehelper:
 
 mybatis:
   log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
+  configuration:
+    cache-enabled: false #禁用二级缓存
+    local-cache-scope: statement #一级缓存指定为statement级别
 logging:
   level:
     com.shangma: debug

@@ -77,6 +77,60 @@
     id, code, name, description, status, department_id, create_time, create_id, update_time, 
     update_id, ext1, ext2
   </sql>
+
+<!--  自定义start ==============================================-->
+  <resultMap id="ConditionRoleVo" type="com.shangma.entity.system.vo.RoleVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_id" jdbcType="BIGINT" property="createId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_id" jdbcType="BIGINT" property="updateId" />
+    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
+    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <association property="permissionList" javaType="list" column="id" select="selectPermission">
+    </association>
+  </resultMap>
+  <select id="selectPermission" resultType="com.shangma.entity.system.Permission">
+    select * from t_system_permission p where p.id in (
+      select rp.permission_id from t_system_role_permission rp where rp.role_id = #{id}
+    )
+  </select>
+
+  <!--      List<RoleVO> condition(RoleVO roleVO); -->
+  <select id="condition" parameterType="com.shangma.entity.system.vo.RoleVO" resultMap="ConditionRoleVo">
+    select <include refid="Base_Column_List"/> from t_system_role
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+      <if test="departmentId != null">
+        department_id = #{departmentId}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+      <if test="name != null">
+        and name like concat('%', #{name}, '%')
+      </if>
+      <if test="description != null">
+        and description like concat('%', #{description}, '%')
+      </if>
+    </trim>
+    group by id
+  </select>
+
+<!--      RoleVO selectVoById(Long id); -->
+  <select id="selectVoById" resultType="com.shangma.entity.system.vo.RoleVO" resultMap="ConditionRoleVo">
+    select <include refid="Base_Column_List"/> from t_system_role where id = #{id}
+  </select>
+
+
+<!--  自定义end ==============================================-->
+
+
+
   <select id="selectByExample" parameterType="com.shangma.entity.system.RoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -119,7 +173,7 @@
       #{updateId,jdbcType=BIGINT}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.shangma.entity.system.Role">
+  <insert id="insertSelective" parameterType="com.shangma.entity.system.Role" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
     insert into t_system_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

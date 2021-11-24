@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goods.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.shangma.entity.goods.Goods">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="goods_kind" jdbcType="INTEGER" property="goodsKind"/>
+        <result column="type_pid" jdbcType="BIGINT" property="typePid"/>
+        <result column="brand_id" jdbcType="BIGINT" property="brandId"/>
+        <result column="goods_model" jdbcType="VARCHAR" property="goodsModel"/>
+        <result column="goods_color" jdbcType="VARCHAR" property="goodsColor"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="type_id" jdbcType="BIGINT" property="typeId"/>
+        <result column="buy_price" jdbcType="DOUBLE" property="buyPrice"/>
+        <result column="market_price" jdbcType="DOUBLE" property="marketPrice"/>
+        <result column="shop_price" jdbcType="DOUBLE" property="shopPrice"/>
+        <result column="min_stocks" jdbcType="INTEGER" property="minStocks"/>
+        <result column="is_buy" jdbcType="INTEGER" property="isBuy"/>
+        <result column="product_id" jdbcType="BIGINT" property="productId"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , goods_kind, type_pid, brand_id, goods_model, goods_color, goods_name, type_id,
+    buy_price, market_price, shop_price, min_stocks, is_buy, product_id, create_by, create_time, 
+    update_by, update_time
+    </sql>
+    <select id="getGoodsList" resultMap="BaseResultMap">
+        SELECT
+        t_goods.id,
+        t_goods.goods_kind,
+        t_goods.type_pid,
+        t_goods.type_id,
+        t_goods.brand_id,
+        t_goods.goods_model,
+        t_goods.goods_color,
+        t_goods.goods_name,
+        t_goods.market_price,
+        t_goods.buy_price,
+        t_goods.shop_price,
+        t_goods.min_stocks,
+        t_goods.is_buy,
+        t_goods.product_id,
+        t_goods_type.id,
+        t_goods_type.type_name,
+        t_goods_brand.id,
+        t_goods_brand.brand_name
+        FROM
+        t_goods
+        LEFT JOIN t_goods_type ON t_goods.type_id = t_goods_type.id LEFT JOIN t_goods_brand ON t_goods.brand_id =
+        t_goods_brand.id
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                AND t_goods.goods_name LIKE CONCAT('%', #{goodsName} ,'%')
+            </if>
+            <if test="goodsModel != null and goodsModel != ''">
+                AND t_goods.goods_model LIKE CONCAT('%', #{goodsModel} ,'%')
+            </if>
+            <if test="goodsColor != null and goodsColor != ''">
+                AND t_goods.goods_color LIKE CONCAT('%', #{goodsColor} ,'%')
+            </if>
+            <if test="typeId != null and typeId != -1">
+                AND
+                (
+                t_goods.type_id = #{typeId} OR
+                t_goods_type.id = #{typeId}
+                )
+            </if>
+            <if test="brandId != null and brandId != -1">
+                AND
+                (
+                t_goods.brand_id = #{brandId} OR
+                t_goods_brand.id = #{brandId}
+                )
+            </if>
+                AND t_goods.goods_kind = 1
+        </where>
+    </select>
+</mapper>

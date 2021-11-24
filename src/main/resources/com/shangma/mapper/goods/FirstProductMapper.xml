@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goods.FirstProductMapper">
+  <resultMap id="BaseResultMap" type="com.shangma.entity.goods.FirstProduct">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
+    <result column="goods_color" jdbcType="VARCHAR" property="goodsColor" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    t_first_product.id,
+    t_first_product.type_id,
+    t_first_product.brand_id,
+    t_first_product.goods_model,
+    t_first_product.goods_color,
+    t_goods_type.id,
+    t_goods_type.type_name,
+    t_goods_brand.id,
+    t_goods_brand.brand_name
+  </sql>
+  <select id="getProductList" resultMap="BaseResultMap">
+    SELECT
+    t_first_product.id,
+    t_first_product.type_id,
+    t_first_product.brand_id,
+    t_first_product.goods_model,
+    t_first_product.goods_color,
+    t_goods_type.id,
+    t_goods_type.type_name,
+    t_goods_brand.id,
+    t_goods_brand.brand_name
+    FROM
+    t_first_product
+    LEFT JOIN t_goods_type ON t_first_product.type_id = t_goods_type.id LEFT JOIN t_goods_brand ON t_first_product.brand_id = t_goods_brand.id
+    <where>
+      <if test="goodsModel != null and goodsModel != ''">
+        AND t_first_product.goods_model LIKE CONCAT('%', #{goodsModel} ,'%')
+      </if>
+      <if test="goodsColor != null and goodsColor != ''">
+        AND t_first_product.goods_color LIKE CONCAT('%', #{goodsColor} ,'%')
+      </if>
+      <if test="typeId != null and typeId != -1">
+        AND
+        (
+        t_first_product.type_id = #{typeId} OR
+        t_goods_type.id = #{typeId}
+        )
+      </if>
+      <if test="brandId != null and brandId != -1">
+        AND
+        (
+        t_first_product.brand_id = #{brandId} OR
+        t_goods_brand.id = #{brandId}
+        )
+      </if>
+    </where>
+  </select>
+</mapper>
