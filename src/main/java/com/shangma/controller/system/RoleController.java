@@ -25,15 +25,10 @@ import java.util.List;
 @RequestMapping("/system/role")
 public class RoleController {
 
-    private ThreadLocal<User> threadLocal = new ThreadLocal<>();
-
     @Autowired
     private RoleService roleService;
 
-    @Autowired
-    private RolePermissionService rolePermissionService;
-
-    public static String ATTRIBUTE_KEY = "role";
+    private ThreadLocal<User> threadLocal = new ThreadLocal<>();
 
     @ModelAttribute
     public void initSessionUser(HttpServletRequest request){
@@ -50,7 +45,7 @@ public class RoleController {
         return AxiosResult.success(pageBean);
     }
 
-    @RequestMapping(value = "/condition/{pageNum}/{pageSize}")
+    @RequestMapping(value = "/condition/{pageNum}/{pageSize}", method = RequestMethod.POST)
     public AxiosResult condition(@RequestBody RoleVO roleVO, @PathVariable int pageNum, @PathVariable int pageSize){
         log.warn("参数:{}", roleVO);
 
@@ -67,6 +62,7 @@ public class RoleController {
         RoleVO roleVO = roleService.getById(id,true);
         return AxiosResult.success(roleVO);
     }
+
 
     @RequestMapping(value = "/list/{id}", method = RequestMethod.DELETE)
     public AxiosResult delete(@PathVariable Long id){

@@ -1,6 +1,7 @@
 package com.shangma.service.system.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shangma.common.system.SystemReturnTool;
 import com.shangma.entity.system.*;
 import com.shangma.entity.system.vo.RoleVO;
 import com.shangma.mapper.system.PermissionMapper;
@@ -11,6 +12,7 @@ import com.shangma.service.system.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
+@Transactional(rollbackFor = Throwable.class)
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -65,10 +68,10 @@ public class RoleServiceImpl implements RoleService {
         for (RolePermission rolePermission : rolePermissionMapper.selectByExample(rolePermissionExample)) {
             rolePermission.setUpdateId(master.getId());
             rolePermissionMapper.updateById(rolePermission);
-            rolePermissionMapper.deleteByExample(rolePermissionExample);
         }
+        rolePermissionMapper.deleteByExample(rolePermissionExample);
 
-        return i == 1 ? true : false;
+        return SystemReturnTool.getReturnResult(i);
     }
 
     //@Override
@@ -121,7 +124,7 @@ public class RoleServiceImpl implements RoleService {
             rolePermissionMapper.insertSelective(new RolePermission(null, roleVO.getId(), permission.getId(), null, master.getId(), null, master.getId(), null, null));
         }
 
-        return i == 1 ? true : false;
+        return SystemReturnTool.getReturnResult(i);
     }
 
     @Override
@@ -143,7 +146,7 @@ public class RoleServiceImpl implements RoleService {
 
         }
 
-        return i == 1;
+        return SystemReturnTool.getReturnResult(i);
     }
 
 }
