@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shangma.mapper.goodsMapper.PriceAdjustmentMapper">
+
+    <select id="search" resultType="com.shangma.entity.goodsEntity.PriceAdjustment">
+        select * from t_price_adjustment
+        <where>
+            <if test="goodsName != null and goodsName != '' ">
+                goods_name like "%${goodsName}%"
+            </if>
+            <if test="approvalStart != null and approvalStart != '' ">
+                and approval_start =#{approvalStart}
+            </if>
+            <if test="priceStart != null and priceStart != '' ">
+                and price_start = #{priceStart}
+            </if>
+            <if test="priceEnd != null and priceEnd != '' ">
+                and price_end = #{priceEnd}
+            </if>
+        </where>
+    </select>
+
+    <select id="lastId" resultType="java.lang.Long">
+        SELECT * FROM t_price_adjustment ORDER BY id DESC LIMIT 1
+    </select>
+
+</mapper>

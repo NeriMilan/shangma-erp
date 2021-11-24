@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goodsMapper.ActivityMarketMapper">
+
+    <select id="search" resultMap="MarketAndGoods">
+        select * from t_free_goods on m.g_id = g.id
+        and g.r_id = r.id
+        <where>
+            <if test="activityName != null and activityName != ''">
+                activity_name like "%${activityName}%"
+            </if>
+            <if test="rewardWay !=null and rewardWay != ''">
+                and reward_way=#{rewardWay}
+            </if>
+            <if test="activityStart != null and activityStart != ''">
+                and activity_start &gt;= #{activityStart}
+            </if>
+            <if test="activityEnd != null and activityEnd != ''">
+                and activity_end &lt;= #{activityEnd}
+            </if>
+            <if test="approvalStatus != null and approvalStatus != ''">
+                and approval_status =#{approvalStatus}
+            </if>
+        </where>
+    </select>
+    <select id="selectList" resultMap="MarketAndGoods">
+        select *
+        from t_activity_market m,
+             t_activity_goods g,
+             t_winning_record r
+        where m.g_id = g.id
+          and g.r_id = r.id
+    </select>
+    <resultMap id="MarketAndGoods" type="com.shangma.entity.goodsEntity.ActivityMarket">
+        <id property="id" column="id"/>
+        <result property="activityName" column="activity_name"/>
+        <result property="rewardWay" column="reward_way"/>
+        <result property="applicant" column="applicant"/>
+        <result property="activityStart" column="activity_start"/>
+        <result property="activityEnd" column="activity_end"/>
+        <result property="freebiesId" column="freebies-id"/>
+        <result property="freebiesNum" column="freebies_num"/>
+        <result property="applicationMatters" column="application_matters"/>
+        <result property="approvalPeople" column="approval_people"/>
+        <result property="approvalTime" column="approval_time"/>
+        <result property="approvalState" column="approval_state"/>
+        <result property="approvalOpinion" column="approval_opinion"/>
+        <result property="gId" column="g_id"/>
+        <collection property="activityGoods" ofType="com.shangma.entity.goodsEntity.ActivityGoods">
+            <result property="freeGoodsId" column="free_goods_id"/>
+            <result property="freeGoodsName" column="free_goods_name"/>
+            <result property="freeGoodModel" column="free_goods_model"/>
+            <result property="freeGoodsColor" column="free_goods_color"/>
+            <result property="freeGoodsNum" column="free_goods_num"/>
+            <result property="freeGoodsResiduals" column="free_goods_residuals"/>
+            <result property="freeGoodsMarketPrice" column="free_goods_market_price"/>
+            <result property="freeGoodsShopPrice" column="free_goods_shop_price"/>
+            <result property="rId" column="r_id"/>
+            <association property="winningRecord" javaType="com.shangma.entity.goodsEntity.WinningRecord">
+                <id property="id" column="id"/>
+                <result property="contactPerson" column="contact_person"/>
+                <result property="contactAddress" column="contact_address"/>
+                <result property="contactPhone" column="contact_phone"/>
+                <result property="idCard" column="id_card"/>
+            </association>
+        </collection>
+    </resultMap>
+</mapper>
