@@ -23,13 +23,13 @@
     <select id="selectCart" resultMap="CartItem">
         select b.id,b.good_num,b.item_status,c.id,c.goods_name,c.goods_color,c.goods_model,c.market_price from   t_cartitem b, t_goods c
         where b.good_id=c.id and b.cart_id=(select id from t_cart where user_id=#{userId})
-        <if test="startTime!=null and startTime!=''">
+        <if test="startTime!=null">
             and b.create_time &gt; #{startTime}
         </if>
-        <if test="endTime!=null and endTime!=''">
+        <if test="endTime!=null">
             and b.create_time &lt; #{endTime}
         </if>
-        <if test="goodName!=null and goodName!=''">
+        <if test="goodName!=null">
             and c.goods_name like '%${goodName}%'
         </if>
         <if test="itemStatus!=null and itemStatus!=''">

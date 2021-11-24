@@ -1,6 +1,7 @@
 package com.shangma.entity.sale.cart;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,10 @@ public class ReceiveEntity {
     @Builder.Default
     private Integer pageSize=2;
     private Long userId;
+    private String userName;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
     private String goodName;
     private Integer itemStatus;

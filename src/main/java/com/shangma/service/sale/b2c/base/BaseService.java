@@ -1,5 +1,6 @@
 package com.shangma.service.sale.b2c.base;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 
@@ -19,5 +20,5 @@ public interface BaseService<T> {
     Integer update(T t);
     Integer deleteBatchIds(List<Long> ids);
     List<T> search(QueryWrapper<T> queryWrapper);
-    PageInfo<T> searchPages(int pageNum, int pageSize, QueryWrapper<T> queryWrapper);
+    PageInfo<T> searchPages(int pageNum, int pageSize, LambdaQueryWrapper<T> queryWrapper);
 }
