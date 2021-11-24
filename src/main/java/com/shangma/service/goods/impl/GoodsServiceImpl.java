@@ -5,7 +5,6 @@ import com.shangma.entity.goods.Goods;
 import com.shangma.entity.system.Role;
 import com.shangma.entity.system.User;
 import com.shangma.mapper.goods.GoodsMapper;
-import com.shangma.service.base.impl.BaseServiceImpl;
 import com.shangma.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
