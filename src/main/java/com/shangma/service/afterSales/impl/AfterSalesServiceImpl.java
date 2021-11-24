@@ -84,5 +84,10 @@ public class AfterSalesServiceImpl implements AfterSalesService {
 
     }
 
+    @Override
+    public List<AfterSalesInformation> selectBySearch(AfterSalesInformation afterSalesInformation) {
+        return afterSalesMapper.selectBySearch(afterSalesInformation);
+    }
+
 
 }

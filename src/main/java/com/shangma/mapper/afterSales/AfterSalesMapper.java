@@ -16,6 +16,7 @@ public interface AfterSalesMapper extends MyMapper<AfterSalesInformation> {
      */
     List<AfterSalesInformation> findByProduceTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 
+    List<AfterSalesInformation> selectBySearch(AfterSalesInformation afterSalesInformation);
 
 
 }

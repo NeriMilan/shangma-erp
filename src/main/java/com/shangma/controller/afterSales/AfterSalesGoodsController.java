@@ -7,10 +7,7 @@ import com.shangma.entity.goods.Goods;
 import com.shangma.service.afterSales.AfterSalesGoodsService;
 import com.shangma.service.afterSales.AfterSalesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +43,7 @@ public class AfterSalesGoodsController {
         }
         return AxiosResult.error();
     }
-    @GetMapping("update")
+    @PostMapping("update")
     public AxiosResult update(@RequestBody AfterSalesGoodsInformation afterSalesGoodsInformation){
 
         int rows = afterSalesGoodsService.update(afterSalesGoodsInformation);

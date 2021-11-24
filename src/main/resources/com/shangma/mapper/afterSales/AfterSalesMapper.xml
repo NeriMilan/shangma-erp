@@ -17,8 +17,37 @@
      </where>
 
   </select>
-<!--售后审核权限查询-->
-    <select id="selectPermission" resultType="com.shangma.entity.system.User">
+<!--动态模糊查询-->
+    <select id="selectBySearch" resultType="com.shangma.entity.afterSales.AfterSalesInformation" parameterType="com.shangma.entity.afterSales.AfterSalesInformation">
+        select * from after_sales_information
+        <where>
+            <if test="id!=null and id !=''">
+                id='${id}'
+            </if>
+            <if test="producer!=null and producer != ''">
+               and producer like '%${producer}%'
+            </if>
+            <if test="startTime!=null">
+                and produce_time &gt;='${startTime}'
+            </if>
+            <if test="endTime!=null">
+                and produce_time &lt;='${endTime}'
+            </if>
+            <if test="approver!=null and approver!=''">
+                and approve like '%${approve}%'
+            </if>
+            <if test="approverStartTime!=null">
+                and approver_time &gt;='${approverStartTime}'
+            </if>
+            <if test="approverEndTime!+null">
+                and approver_time &lt;='${approverEndTime}'
+
+            </if>
+            <if test="approveStatus!=null and approveStatus!=''">
+                and approve_status like '${approveStatus}'
+            </if>
+
+        </where>
 
 
 

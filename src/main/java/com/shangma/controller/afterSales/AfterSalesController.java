@@ -8,6 +8,7 @@ import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.afterSales.AfterSalesInformation;
 import com.shangma.entity.system.User;
 import com.shangma.service.afterSales.AfterSalesService;
+import lombok.experimental.Helper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -26,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -173,22 +175,53 @@ public class AfterSalesController {
     }
     /**
      * 审核
-     * 先判定权限是否足够 然后修改审核状态
+     * 先判定权限是否足够 然后修改审核状态(权限没判定)
      */
-    @GetMapping("examine")
-    public AxiosResult examine(HttpServletRequest httpRequest){
+    @PostMapping("examine")
+    public AxiosResult examine(HttpServletRequest httpRequest,@RequestBody AfterSalesInformation afterSalesInformation,String status){
         User user = null;
         HttpSession session = httpRequest.getSession();
         Object obj = session.getAttribute("user");
         if (obj!=null){
             user = (User) obj;
         }
-        String loginName = user.getLoginName();
 
+        afterSalesInformation.setApproverTime(LocalDateTime.now());
+        afterSalesInformation.setApprover(user.getLoginName());
+        afterSalesInformation.setApproveStatus(status);
 
+        int row = afterSalesService.update(afterSalesInformation);
+        if (row>0){
+            return AxiosResult.success();
+        }
+            return AxiosResult.error();
 
-        return AxiosResult.error();
     }
+
+
+    /**
+     * 审核页查询
+     *
+     */
+    @GetMapping("selectBySearch")
+    public AxiosResult selectBySearch(
+            @RequestParam(defaultValue = "1")Integer pageIndex,
+            @RequestParam(defaultValue = "10")Integer pageSize,
+            AfterSalesInformation afterSalesInformation){
+        PageHelper.startPage(pageIndex,pageSize);
+        List<AfterSalesInformation> afterSalesInformations = afterSalesService.selectBySearch(afterSalesInformation);
+        PageInfo<AfterSalesInformation> pageInfo = new PageInfo<>(afterSalesInformations);
+        //获取总条数
+        long total = pageInfo.getTotal();
+        List<AfterSalesInformation> list = pageInfo.getList();
+        PageBean<AfterSalesInformation> data = PageBean.initData(total, list);
+        if (data!=null){
+            return AxiosResult.success(data);
+        }
+        return AxiosResult.error();
+
+    }
+
 
 
 

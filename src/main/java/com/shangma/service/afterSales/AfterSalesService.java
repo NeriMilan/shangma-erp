@@ -49,4 +49,5 @@ public interface AfterSalesService {
      * @param afterSalesInformation
      */
     int examine(AfterSalesInformation afterSalesInformation);
+    List<AfterSalesInformation> selectBySearch(AfterSalesInformation afterSalesInformation);
 }
