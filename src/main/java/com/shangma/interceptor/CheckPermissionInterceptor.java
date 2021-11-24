@@ -74,7 +74,7 @@ public class CheckPermissionInterceptor implements HandlerInterceptor {
         List<Operate> temp = operateMapper.selectByExample(operateExample);
 
         Operate operate = new Operate();
-//        operate.setPid(temp.get(0).getId());
+        operate.setPid(temp.get(0).getId());
         operate.setLocation(location);
         operateMapper.insertSelective(operate);
     }
