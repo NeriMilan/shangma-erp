@@ -7,4 +7,121 @@
         SELECT order_id,shop_type,business_type,payment,distribution_mode,order_status
          from t_b2c_internet_sale_order
     </select>
+    <select id="findGoods" parameterType="Long" resultType="com.shangma.entity.sale.b2c.OrderGoods">
+        select DISTINCT t1.good_name FROM t_b2c_order_goods t1,t_b2c_internet_sale_order t2 where t1.order_id=t2.order_id and t2.order_id=#{id}
+    </select>
+    <select id="search" parameterType="com.shangma.entity.sale.b2c.InternetSaleOrder" resultType="com.shangma.entity.sale.b2c.InternetSaleOrder">
+        select DISTINCT t1.order_id,t1.order_type,t1.business_type,t1.payment,t1.distribution_mode,t1.order_status
+        from t_b2c_internet_sale_order t1,t_b2c_order_goods t2
+        where t1.order_id=t2.order_id
+        <if test="orderId !=null and orderId != ''">
+            and t1.order_id like '%${orderId}%'
+        </if>
+        <if test="orderType !=null and orderType != ''">
+            and t1.order_type like '%${orderType}%'
+        </if>
+        <if test="payment !=null and payment != ''">
+            and t1.payment like '%${payment}%'
+        </if>
+        <if test="businessType !=null and businessType != ''">
+            and t1.business_type like '%${businessType}%'
+        </if>
+        <if test="timeFrom !=null">
+            and t1.order_date &gt;= '${timeFrom}'
+        </if>
+        <if test="timeTo != null">
+            and t1.order_date &lt;= '${timeTo}'
+        </if>
+        <if test="goodsName !=null and goodsName != ''">
+            and t2.good_name like '%${goodsName}%'
+        </if>
+        <if test="orderStatus !=null and orderStatus != ''">
+            and t2.order_status like '%${orderStatus}%'
+        </if>
+    </select>
+    <select id="findOrderById" parameterType="Long" resultType="com.shangma.entity.sale.b2c.InternetSaleOrder">
+        select * FROM t_b2c_internet_sale_order where order_id=#{orderId}
+    </select>
+    <select id="findCustomerById" parameterType="Long" resultType="com.shangma.entity.sale.b2c.Customer">
+        select * from t_b2c_customer where id=#{id}
+    </select>
+    <select id="findGoodsByOrderId" parameterType="Long" resultType="com.shangma.entity.sale.b2c.OrderGoods">
+        select * from t_b2c_order_goods where order_id = #{orderId}
+    </select>
+    <select id="searchByStatus" parameterType="com.shangma.entity.sale.b2c.InternetSaleOrder" resultType="com.shangma.entity.sale.b2c.InternetSaleOrder">
+        SELECT * FROM t_b2c_internet_sale_order where export_status=0 and shop_type=#{shopType}
+    </select>
+    <select id="getOrders" parameterType="java.util.List" resultType="com.shangma.entity.sale.b2c.InternetSaleOrder">
+        select * from t_b2c_internet_sale_order where order_id in
+        <foreach collection="idList" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+<!--     open="begin" close="end;"-->
+    <update id="001" >
+
+        <foreach collection="orderIds" item="orderId" index="index" open="" close="" separator=";">
+            update t_b2c_internet_sale_order
+            <set>
+                export_status = 1
+            </set>
+            where order_id = ${orderId}
+        </foreach>
+    </update>
+    <update id="updateStatus" >
+        update t_b2c_internet_sale_order set export_status = 1 where order_id = #{orderId}
+    </update>
+    <insert id="002" parameterType="java.util.List" >
+        INSERT INTO `shangma-erp`.`t_b2c_sales_order`
+        (`order_id`, `order_type`, `order_action`, `business_type`, `payment`,
+         `distribution_mode`, `order_status`, `order_date`, `customer_id`)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            ${item.orderId},
+            ${item.orderType},
+            ${item.orderAction},
+            ${item.businessType},
+            ${item.payment},
+            ${item.distributionMode},
+            ${item.orderStatus},
+            ${item.orderDate},
+            ${item.customerId}
+            )
+        </foreach>
+    </insert>
+    <insert id="addOrder" parameterType="com.shangma.entity.sale.b2c.InternetSaleOrder" >
+        INSERT INTO `shangma-erp`.`t_b2c_sales_order`
+        (`order_id`, `order_type`, `order_action`, `business_type`, `payment`,
+         `distribution_mode`, `order_status`, `order_date`, `customer_id`)
+        VALUES
+        (
+            ${orderId},
+            '${orderType}',
+            '${orderAction}',
+            '${businessType}',
+            '${payment}',
+            '${distributionMode}',
+            '${orderStatus}',
+            '${orderDate}',
+            ${customerId}
+            )
+    </insert>
+    <insert id="addToStockOrder" parameterType="com.shangma.entity.sale.b2c.InternetSaleOrder" >
+        INSERT INTO `shangma-erp`.`t_b2c_stock_out_manage`
+        (`order_id`, `order_type`, `order_action`, `business_type`, `payment`,
+         `distribution_mode`, `order_status`, `order_date`, `customer_id`)
+        VALUES
+        (
+            ${orderId},
+            '${orderType}',
+            '${orderAction}',
+            '${businessType}',
+            '${payment}',
+            '${distributionMode}',
+            '${orderStatus}',
+            '${orderDate}',
+            ${customerId}
+            )
+    </insert>
 </mapper>

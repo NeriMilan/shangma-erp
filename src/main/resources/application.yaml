@@ -31,4 +31,4 @@ mybatis:
     local-cache-scope: statement #一级缓存指定为statement级别
 logging:
   level:
-    com.shangma.mapper: debug
+    com.shangma: debug

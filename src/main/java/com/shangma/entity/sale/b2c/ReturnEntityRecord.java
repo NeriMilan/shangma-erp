@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @TableName("t_b2c_sales_return_entity_record")
 public class ReturnEntityRecord {
-  private Long id;
   @TableId(type = IdType.AUTO)
+  private Long id;
   private Long orderId;
   private String orderType;
   private String orderAction;
