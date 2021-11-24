@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -82,7 +83,8 @@ public class CartServiceImpl extends BaseServiceImpl<CartItem> implements CartSe
         internetSaleOrder.setOrderStatus("已收款未发货");
         internetSaleOrder.setCustomerId(userId);
         internetSaleOrder.setExportStatus('0');
-        internetSaleOrder.setShopType("淘宝订单");
+        internetSaleOrder.setShopType("淘宝网店");
+        internetSaleOrder.setOrderDate(LocalDateTime.now());
         onlineOrderMapper.insert(internetSaleOrder);
         Long orderId = internetSaleOrder.getOrderId();
         OrderGoods orderGoods=new OrderGoods();
