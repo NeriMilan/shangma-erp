@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("goods/product")
-public class FirstProductController extends BaseController {
+public class FirstProductController {
 
     @Autowired
     public FirstProductService firstProductService;
