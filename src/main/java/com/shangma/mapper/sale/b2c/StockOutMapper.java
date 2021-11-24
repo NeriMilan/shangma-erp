@@ -17,7 +17,6 @@ public interface StockOutMapper extends MyMapper<StockOutManage> {
      * 1.初始化页面
      * 2.根据模糊搜索信息展示界面
      * 3.根据OrderId展示订单详细信息
-     * todo :4.根据orderId生成出库记录单，修改状态为已出库，增加创建人和创建时间两个字段信息
      */
     List<StockOutManage> findAll();
     List<StockOutManage> search(StockOutManage stockOutManage);
