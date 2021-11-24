@@ -1,10 +1,10 @@
-package com.shangma.controller.goodsController;
+package com.shangma.controller.goods;
 
 
 import com.shangma.common.http.AxiosResult;
 import com.shangma.common.pagebean.PageBean;
-import com.shangma.entity.goodsEntity.ActivityGoods;
-import com.shangma.service.goodsService.ActivityGoodsService;
+import com.shangma.entity.goods.ActivityGoods;
+import com.shangma.service.goods.ActivityGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

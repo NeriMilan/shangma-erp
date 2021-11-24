@@ -80,4 +80,22 @@
                 AND t_goods.goods_kind = 1
         </where>
     </select>
+    <update id="reduce">
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+                min_stocks= min_stocks - #{num}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <update id="plus">
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+                min_stocks= min_stocks + #{num}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

@@ -1,9 +1,8 @@
 package com.shangma.service.goodsService;
 
 import com.shangma.common.pagebean.PageBean;
-import com.shangma.entity.goodsEntity.ActivityPromotion;
 import com.shangma.entity.goodsEntity.Goods;
-import com.shangma.service.goodsService.base.BaseService;
+import com.shangma.service.goods.base.BaseService;
 
 
 

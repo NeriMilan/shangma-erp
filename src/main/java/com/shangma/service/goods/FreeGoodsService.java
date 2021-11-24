@@ -36,4 +36,10 @@ public interface FreeGoodsService extends IService<FreeGoods> {
      */
     @Transactional
     boolean goodsToFree(Long id, Integer addStocks);
+    
+    /**
+     * 减去赠品数量
+     * @return
+     */
+    Long reduce(Integer num,Long id);
 }

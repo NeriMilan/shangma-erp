@@ -18,5 +18,10 @@ public interface GoodsService extends IService<Goods> {
      */
 
     List getAll(Goods goods);
-
+    
+    //减去商品的数量
+    Integer reduce(Integer num,Long id);
+    
+    //加上商品的数量
+    Integer plus(Integer num,Long id);
 }

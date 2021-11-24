@@ -1,4 +1,4 @@
-package com.shangma.entity.goodsEntity;
+package com.shangma.entity.goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -27,7 +27,7 @@ public class ActivityGoods {
 
     private Double freeGoodsShopPrice;
 
-    private int rId;
+    private Long rId;
     //中奖人信息
     private WinningRecord winningRecord;
 }

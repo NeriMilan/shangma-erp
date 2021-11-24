@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shangma.mapper.goodsMapper.ActivityPromotionMapper">
+<mapper namespace="com.shangma.mapper.goods.ActivityPromotionMapper">
     <insert id="insert">
         insert into t_activity_promotion
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -135,7 +135,7 @@
         </where>
     </select>
 
-    <resultMap id="activityList" type="com.shangma.entity.goodsEntity.ActivityPromotion">
+    <resultMap id="activityList" type="com.shangma.entity.goods.ActivityPromotion">
         <id property="id" column="id"/>
         <result property="activityStart" column="activity_start"/>
         <result property="activityEnd" column="activity_end"/>
@@ -147,7 +147,7 @@
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
         <result property="pId" column="p_id"/>
-        <association property="priceAdjustment" javaType="com.shangma.entity.goodsEntity.PriceAdjustment">
+        <association property="priceAdjustment" javaType="com.shangma.entity.goods.PriceAdjustment">
             <result property="goodsId" column="goods_id"/>
             <result property="goodsName" column="goods_name"/>
             <result property="goodsNum" column="goods_num"/>

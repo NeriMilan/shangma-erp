@@ -1,8 +1,9 @@
-package com.shangma.entity.goodsEntity;
+package com.shangma.entity.goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.shangma.entity.goods.ActivityGoods;
 import lombok.Data;
 
 import java.util.Date;
@@ -40,7 +41,7 @@ public class ActivityMarket {
 
     private String approvalOpinion;
 
-    private int pId;
+    private Long gId;
 
 
     //活动赠品

@@ -1,6 +1,6 @@
-package com.shangma.mapper.goodsMapper;
+package com.shangma.mapper.goods;
 
-import com.shangma.entity.goodsEntity.ActivityPromotion;
+import com.shangma.entity.goods.ActivityPromotion;
 import com.shangma.mapper.base.MyMapper;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface ActivityPromotionMapper extends MyMapper<ActivityPromotion> {
     List<ActivityPromotion> select();
 
     //添加活动
-    Integer insert();
+    int insert(ActivityPromotion activityPromotion);
 
     Integer update(ActivityPromotion activityPromotion);
 }

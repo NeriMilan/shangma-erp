@@ -1,11 +1,11 @@
 package com.shangma.service.goods.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
 import com.shangma.entity.goods.FirstProduct;
 import com.shangma.mapper.goods.FirstProductMapper;
 import com.shangma.service.goods.FirstProductService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

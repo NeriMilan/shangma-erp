@@ -1,8 +1,8 @@
-package com.shangma.service.goodsService.base.impl;
+package com.shangma.service.goods.base.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shangma.mapper.base.MyMapper;
-import com.shangma.service.goodsService.base.BaseService;
+import com.shangma.service.goods.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

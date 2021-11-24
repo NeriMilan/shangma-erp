@@ -1,15 +1,14 @@
-package com.shangma.service.goodsService.impl;
+package com.shangma.service.goods.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shangma.common.pagebean.PageBean;
-import com.shangma.entity.goodsEntity.ActivityPromotion;
-import com.shangma.mapper.goodsMapper.ActivityPromotionMapper;
-import com.shangma.service.goodsService.ActivityPromotionService;
+import com.shangma.entity.goods.ActivityPromotion;
+import com.shangma.mapper.goods.ActivityPromotionMapper;
+import com.shangma.service.goods.ActivityPromotionService;
 import com.shangma.service.goodsService.GoodsService;
-import com.shangma.service.goodsService.PriceAdjustmentService;
-import com.shangma.service.goodsService.base.impl.BaseServiceImpl;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.shangma.service.goods.PriceAdjustmentService;
+import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +55,6 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
     /**
      * 增加活动商品，取出活动商品的数量，从商品列表中减去该数量
      */
-    @Override
     public int increase(ActivityPromotion activityPromotion) {
 
         //在价格变动表中加入activityPromotion.getPriceAdjustment()   嵌套的实体类
@@ -80,9 +78,12 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
     public int update(ActivityPromotion activityPromotion) {
         Long pId = activityPromotion.getPId();
         activityPromotion.getPriceAdjustment().setId(pId);
+        
         System.out.println(activityPromotion.getPriceAdjustment());
+        
         int update = priceService.update(activityPromotion.getPriceAdjustment());
         int update1 = mapper.update(activityPromotion);
+        
         if (update > 0 && update1 > 0) {
             return 1;
         } else {
@@ -105,13 +106,18 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
 
             if (GoodsNum > discountNum) {
                 //当审核状态为已审核时修改当前物品的状态
-                row = mapper.update(activityPromotion);
+                 mapper.update(activityPromotion);
                 //当审核状态为审核通过减去该物品在物品表的数量，调用物品表service层的方法
-                goodsService.reduce(discountNum, id);
+               return goodsService.reduce(discountNum, id);
+            }else {
+                //库存小于转移量，将转移所有库存
+                activityPromotion.getPriceAdjustment().setDiscountNum(GoodsNum);
+                goodsService.reduce(GoodsNum, id);
+                return mapper.update(activityPromotion);
             }
         } else if (activityPromotion.getAuditState() == 2) {
             //审核不通过修改该条数据状态值
-            mapper.update(activityPromotion);
+           return mapper.update(activityPromotion);
         }
         return row;
     }
