@@ -13,10 +13,12 @@ import com.shangma.service.goods.WinningRecordService;
 import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ActivityMarketServiceImpl extends BaseServiceImpl<ActivityMarket> implements ActivityMarketService {
 @Autowired
 private ActivityMarketMapper marketMapper;

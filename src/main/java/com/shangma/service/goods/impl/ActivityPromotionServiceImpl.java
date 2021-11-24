@@ -6,7 +6,7 @@ import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.goods.ActivityPromotion;
 import com.shangma.mapper.goods.ActivityPromotionMapper;
 import com.shangma.service.goods.ActivityPromotionService;
-import com.shangma.service.goodsService.GoodsService;
+import com.shangma.service.goods.GoodsService;
 import com.shangma.service.goods.PriceAdjustmentService;
 import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +102,7 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
 
         if (activityPromotion.getAuditState() == 1) {
             //当审核通过时再次去物品表去查询该物品的数量，防止数据库中商品数量为负数
-            Integer GoodsNum = goodsService.findById(id).getMinStocks();
+            Integer GoodsNum = goodsService.getById(id).getMinStocks();
 
             if (GoodsNum > discountNum) {
                 //当审核状态为已审核时修改当前物品的状态

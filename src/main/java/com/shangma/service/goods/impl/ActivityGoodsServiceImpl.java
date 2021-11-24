@@ -10,15 +10,18 @@ import com.shangma.service.goods.WinningRecordService;
 import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ActivityGoodsServiceImpl extends BaseServiceImpl<ActivityGoods> implements ActivityGoodsService {
     @Autowired
     private ActivityGoodsMapper mapper;
     @Autowired
     private WinningRecordService winningRecordService;
+    
     public PageBean<ActivityGoods> list(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
         List<ActivityGoods> activityGoods = mapper.selectList(null);
