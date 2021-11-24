@@ -6,6 +6,8 @@ import com.shangma.service.system.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,11 +31,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        log.info("测试handler:{}",handler);
-        log.info("测试handler类型:{}",handler.getClass());
 
         response.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
@@ -50,9 +52,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        log.info("LoginInterceptor类userService:{}",userService);
         user = userService.getById(user.getId());
+        user.setIp(request.getRemoteAddr());
         session.setAttribute("user", user);
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        ops.set("shangma-erp:system:user:"+user.getId()+":roleId",user.getRoleId().toString());
         return true;
     }
 

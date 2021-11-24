@@ -5,7 +5,9 @@ import com.shangma.entity.system.Permission;
 import com.shangma.entity.system.PermissionExample;
 import java.util.List;
 
+import com.shangma.entity.system.User;
 import com.shangma.entity.system.vo.PermissionVO;
+import com.shangma.entity.system.vo.UserRolePermissionVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper extends BaseMapper<Permission> {
@@ -34,4 +36,8 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     List<PermissionVO> condition(PermissionVO permissionVO);
 
     PermissionVO selectVoById(Long id);
+
+    List<UserRolePermissionVO> conditionReport(User user);
+
+    List<String> getOperatesByRoleId(Long roleId);
 }

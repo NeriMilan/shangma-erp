@@ -45,7 +45,7 @@ public class RoleController {
         return AxiosResult.success(pageBean);
     }
 
-    @RequestMapping(value = "/condition/{pageNum}/{pageSize}")
+    @RequestMapping(value = "/condition/{pageNum}/{pageSize}", method = RequestMethod.POST)
     public AxiosResult condition(@RequestBody RoleVO roleVO, @PathVariable int pageNum, @PathVariable int pageSize){
         log.warn("参数:{}", roleVO);
 

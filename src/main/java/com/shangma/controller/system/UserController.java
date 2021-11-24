@@ -5,6 +5,7 @@ import com.shangma.common.http.AxiosResult;
 import com.shangma.common.http.AxiosStatus;
 import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.system.User;
+import com.shangma.entity.system.vo.LoginUserVO;
 import com.shangma.service.system.DepartmentService;
 import com.shangma.service.system.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,11 @@ public class UserController {
             User loginUser = list.get(0);
             request.getSession().setAttribute(ATTRIBUTE_KEY, loginUser);
             log.info("登陆后的Session中的user:{}", request.getSession().getAttribute(ATTRIBUTE_KEY));
+
+            // 写不出
+            //LoginUserVO loginUserVO = userService.getLoginUserByUser(loginUser);
+            // return AxiosResult.success(loginUserVO);
+
             return AxiosResult.success(loginUser);
         }
         return AxiosResult.error(AxiosStatus.ERROR_SYSTEM_LOGIN_NOTFOUND);
@@ -65,7 +71,9 @@ public class UserController {
         return AxiosResult.success(pageBean);
     }
 
-    @RequestMapping(value = "/condition/{pageNum}/{pageSize}")
+
+
+    @RequestMapping(value = "/condition/{pageNum}/{pageSize}", method = RequestMethod.POST)
     public AxiosResult condition(@RequestBody User user, @PathVariable int pageNum, @PathVariable int pageSize) {
         log.warn("参数:{}", user);
 

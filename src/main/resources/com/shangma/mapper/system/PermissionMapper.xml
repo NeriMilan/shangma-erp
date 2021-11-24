@@ -1,352 +1,469 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shangma.mapper.system.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.shangma.entity.system.Permission">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="status" jdbcType="BIGINT" property="status" />
-    <result column="operate" jdbcType="VARCHAR" property="operate" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_id" jdbcType="BIGINT" property="createId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_id" jdbcType="BIGINT" property="updateId" />
-    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
-    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.shangma.entity.system.Permission">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="status" jdbcType="BIGINT" property="status"/>
+        <result column="operate" jdbcType="VARCHAR" property="operate"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+        <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, name, description, status, operate, create_time, create_id, update_time, update_id, 
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id
+        , name, description, status, operate, create_time, create_id, update_time, update_id,
     ext1, ext2
-  </sql>
+    </sql>
 
-<!--  自定义 start =====================================-->
+    <!--  自定义 start =====================================-->
 
-<!--      PermissionVO selectVoById(Long id); -->
-  <select id="selectVoById" resultMap="ConditionPermissionVO">
-    select <include refid="Base_Column_List"/> from t_system_permission where id = #{id}
-  </select>
+    <!--        List<String> getOperatesByRoleId(Long roleId);  -->
+    <select id="getOperatesByRoleId" resultType="string">
+        select p.operate
+        from t_system_permission p
+                 inner join t_system_role_permission rp
+                            on p.id = rp.permission_id
+            where rp.role_id = #{id}
+    </select>
 
-<!--      List<PermissionVO> condition(PermissionVO permissionVO); -->
-  <resultMap id="ConditionPermissionVO" type="com.shangma.entity.system.vo.PermissionVO">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="status" jdbcType="BIGINT" property="status" />
-    <result column="operate" jdbcType="VARCHAR" property="operate" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_id" jdbcType="BIGINT" property="createId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_id" jdbcType="BIGINT" property="updateId" />
-    <result column="ext1" jdbcType="VARCHAR" property="ext1" />
-    <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+    <!--      List<UserRolePermissionVO> conditionReport(User user);  -->
+    <resultMap id="ConditionReport" type="com.shangma.entity.system.vo.UserRolePermissionVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="department_id" jdbcType="BIGINT" property="departmentId"/>
+        <result column="sex" jdbcType="BIGINT" property="sex"/>
+        <result column="status" jdbcType="BIGINT" property="status"/>
+        <result column="job_id" jdbcType="BIGINT" property="jobId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="remark1" jdbcType="VARCHAR" property="remark1"/>
+        <result column="remark2" jdbcType="VARCHAR" property="remark2"/>
+        <result column="remark3" jdbcType="VARCHAR" property="remark3"/>
+        <result column="remark4" jdbcType="VARCHAR" property="remark4"/>
+        <result column="remark5" jdbcType="VARCHAR" property="remark5"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+        <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
 
-    <association property="roleList" javaType="list" column="id" select="selectRole"/>
-  </resultMap>
+        <association property="departmentName" javaType="string" column="department_id" select="setDepartmentName"/>
+        <association property="jobName" javaType="string" column="job_id" select="setJobName"/>
+        <association property="roleName" javaType="string" column="role_id" select="setRoleName"/>
 
-  <select id="selectRole" resultType="com.shangma.entity.system.Role">
-    select r.* from t_system_role r where r.id in(
-        select rp.role_id from t_system_role_permission rp where rp.permission_id = #{id}
-    )
-  </select>
+        <association property="permissionIdList" javaType="list" column="role_id" select="setPermissionIdList"/>
+        <association property="permissionNameList" javaType="list" column="role_id" select="setPermissionNameList"/>
+        <association property="scopeList" javaType="list" column="role_id" select="setScopeList"/>
+    </resultMap>
+    <select id="setDepartmentName" resultType="string">
+        select name
+        from t_system_department
+        where id = #{id}
+    </select>
+    <select id="setJobName" resultType="string">
+        select name
+        from t_system_job
+        where id = #{id}
+    </select>
+    <select id="setRoleName" resultType="string">
+        select name
+        from t_system_role
+        where id = #{id}
+    </select>
+    <select id="setPermissionIdList" resultType="string">
+        select permission_id
+        from t_system_role_permission
+        where role_id = #{id}
+    </select>
+    <select id="setPermissionNameList" resultType="string">
+        select p.name
+        from t_system_permission p
+                 inner join t_system_role_permission rp
+                            on p.id = rp.permission_id
+        where rp.role_id = #{id}
+    </select>
+    <select id="setScopeList" resultType="string">
+        select p.ext1
+        from t_system_permission p
+                 inner join t_system_role_permission rp
+                            on p.id = rp.permission_id
+        where rp.role_id = #{id}
+    </select>
 
-  <select id="condition" parameterType="com.shangma.entity.system.vo.PermissionVO" resultMap="ConditionPermissionVO">
-    select <include refid="Base_Column_List"/> from t_system_permission
-    <trim prefix="WHERE" prefixOverrides="AND |OR ">
-        <if test="id != null">
-            id = #{id}
+    <select id="conditionReport" resultMap="ConditionReport">
+        select
+        <include refid="com.shangma.mapper.system.UserMapper.Base_Column_List"/>
+        from t_system_user
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="departmentId != null">
+                department_id = #{departmentId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="jobId != null">
+                and job_id = #{jobId}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+            <if test="username != null">
+                and username like concat('%', #{username}, '%')
+            </if>
+            <if test="loginName != null">
+                and login_name like concat('%', #{loginName}, '%')
+            </if>
+        </trim>
+        order by id
+
+    </select>
+
+
+    <!--      PermissionVO selectVoById(Long id); -->
+    <select id="selectVoById" resultMap="ConditionPermissionVO">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_permission where id = #{id}
+    </select>
+
+    <!--      List<PermissionVO> condition(PermissionVO permissionVO); -->
+    <resultMap id="ConditionPermissionVO" type="com.shangma.entity.system.vo.PermissionVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="status" jdbcType="BIGINT" property="status"/>
+        <result column="operate" jdbcType="VARCHAR" property="operate"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+        <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
+
+        <association property="roleList" javaType="list" column="id" select="selectRole"/>
+    </resultMap>
+
+    <select id="selectRole" resultType="com.shangma.entity.system.Role">
+        select r.*
+        from t_system_role r
+        where r.id in (
+            select rp.role_id from t_system_role_permission rp where rp.permission_id = #{id}
+        )
+    </select>
+
+    <select id="condition" parameterType="com.shangma.entity.system.vo.PermissionVO" resultMap="ConditionPermissionVO">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_permission
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </trim>
+        order by id
+    </select>
+
+    <!--  自定义 end =====================================-->
+
+    <select id="selectByExample" parameterType="com.shangma.entity.system.PermissionExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-        <if test="status != null">
-          and status = #{status}
+        <include refid="Base_Column_List"/>
+        from t_system_permission
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-    </trim>
-    order by id
-  </select>
-
-<!--  自定义 end =====================================-->
-
-  <select id="selectByExample" parameterType="com.shangma.entity.system.PermissionExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_system_permission
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_system_permission
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from t_system_permission
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.shangma.entity.system.PermissionExample">
-    delete from t_system_permission
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.shangma.entity.system.Permission">
-    insert into t_system_permission (id, name, description, 
-      status, operate, create_time, 
-      create_id, update_time, update_id, 
-      ext1, ext2)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIGINT}, #{operate,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, 
-      #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shangma.entity.system.Permission">
-    insert into t_system_permission
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="operate != null">
-        operate,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createId != null">
-        create_id,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateId != null">
-        update_id,
-      </if>
-      <if test="ext1 != null">
-        ext1,
-      </if>
-      <if test="ext2 != null">
-        ext2,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=BIGINT},
-      </if>
-      <if test="operate != null">
-        #{operate,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        #{updateId,jdbcType=BIGINT},
-      </if>
-      <if test="ext1 != null">
-        #{ext1,jdbcType=VARCHAR},
-      </if>
-      <if test="ext2 != null">
-        #{ext2,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.shangma.entity.system.PermissionExample" resultType="java.lang.Long">
-    select count(*) from t_system_permission
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_system_permission
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.name != null">
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_permission
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_system_permission
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.shangma.entity.system.PermissionExample">
+        delete from t_system_permission
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.shangma.entity.system.Permission">
+        insert into t_system_permission (id, name, description,
+                                         status, operate, create_time,
+                                         create_id, update_time, update_id,
+                                         ext1, ext2)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+                #{status,jdbcType=BIGINT}, #{operate,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{createId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT},
+                #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.shangma.entity.system.Permission">
+        insert into t_system_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="operate != null">
+                operate,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+            <if test="ext1 != null">
+                ext1,
+            </if>
+            <if test="ext2 != null">
+                ext2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIGINT},
+            </if>
+            <if test="operate != null">
+                #{operate,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=BIGINT},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.shangma.entity.system.PermissionExample" resultType="java.lang.Long">
+        select count(*) from t_system_permission
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_system_permission
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=BIGINT},
+            </if>
+            <if test="record.operate != null">
+                operate = #{record.operate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createId != null">
+                create_id = #{record.createId,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateId != null">
+                update_id = #{record.updateId,jdbcType=BIGINT},
+            </if>
+            <if test="record.ext1 != null">
+                ext1 = #{record.ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext2 != null">
+                ext2 = #{record.ext2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_system_permission
+        set id = #{record.id,jdbcType=BIGINT},
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
         status = #{record.status,jdbcType=BIGINT},
-      </if>
-      <if test="record.operate != null">
         operate = #{record.operate,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createId != null">
         create_id = #{record.createId,jdbcType=BIGINT},
-      </if>
-      <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateId != null">
         update_id = #{record.updateId,jdbcType=BIGINT},
-      </if>
-      <if test="record.ext1 != null">
         ext1 = #{record.ext1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ext2 != null">
-        ext2 = #{record.ext2,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_system_permission
-    set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=BIGINT},
-      operate = #{record.operate,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      create_id = #{record.createId,jdbcType=BIGINT},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      update_id = #{record.updateId,jdbcType=BIGINT},
-      ext1 = #{record.ext1,jdbcType=VARCHAR},
-      ext2 = #{record.ext2,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shangma.entity.system.Permission">
-    update t_system_permission
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=BIGINT},
-      </if>
-      <if test="operate != null">
-        operate = #{operate,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        create_id = #{createId,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateId != null">
-        update_id = #{updateId,jdbcType=BIGINT},
-      </if>
-      <if test="ext1 != null">
-        ext1 = #{ext1,jdbcType=VARCHAR},
-      </if>
-      <if test="ext2 != null">
-        ext2 = #{ext2,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shangma.entity.system.Permission">
-    update t_system_permission
-    set name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIGINT},
-      operate = #{operate,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_id = #{createId,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_id = #{updateId,jdbcType=BIGINT},
-      ext1 = #{ext1,jdbcType=VARCHAR},
-      ext2 = #{ext2,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        ext2 = #{record.ext2,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shangma.entity.system.Permission">
+        update t_system_permission
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIGINT},
+            </if>
+            <if test="operate != null">
+                operate = #{operate,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId,jdbcType=BIGINT},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shangma.entity.system.Permission">
+        update t_system_permission
+        set name        = #{name,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR},
+            status      = #{status,jdbcType=BIGINT},
+            operate     = #{operate,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            create_id   = #{createId,jdbcType=BIGINT},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            update_id   = #{updateId,jdbcType=BIGINT},
+            ext1        = #{ext1,jdbcType=VARCHAR},
+            ext2        = #{ext2,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
