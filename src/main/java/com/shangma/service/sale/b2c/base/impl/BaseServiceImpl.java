@@ -1,5 +1,6 @@
 package com.shangma.service.sale.b2c.base.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -34,7 +35,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public PageInfo<T> searchPages(int pageNum, int pageSize, QueryWrapper<T> queryWrapper) {
+    public PageInfo<T> searchPages(int pageNum, int pageSize, LambdaQueryWrapper<T> queryWrapper) {
         PageHelper.startPage(pageNum,pageSize);
         List<T> list = myMapper.selectList(queryWrapper);
         PageInfo<T> pageInfo=new PageInfo<>(list);
