@@ -1,17 +1,22 @@
 package com.shangma.config;
 
+import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Ryze
@@ -22,13 +27,12 @@ import java.sql.SQLException;
 public class DruidConfiguration {
 
     // DruidDataSource. 连接属性在配置文件中@ConfigurationProperties引入
+
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() throws SQLException {
-
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setFilters("stat,wall");
-
         return druidDataSource;
     }
 
