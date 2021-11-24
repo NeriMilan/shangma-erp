@@ -17,18 +17,26 @@ public class MyWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CheckPermissionInterceptor())
-                .addPathPatterns("/**")  //所有请求都被拦截包括静态资源
-                .excludePathPatterns("/","/system/user/login","/css/**","/fonts/**","/images/**","/js/**");
 
         registry.addInterceptor(loginInterceptor())
                 .addPathPatterns("/**")  //所有请求都被拦截包括静态资源
-                .excludePathPatterns("/","/system/user/login/**","/css/**","/fonts/**","/images/**","/js/**");
+                .excludePathPatterns("/", "/system/user/login/**", "/css/**", "/fonts/**", "/images/**", "/js/**");
+
+        registry.addInterceptor(checkPermissionInterceptor())
+                .addPathPatterns("/**")  //所有请求都被拦截包括静态资源
+                .excludePathPatterns("/", "/system/user/login/**", "/css/**", "/fonts/**", "/images/**", "/js/**");
+
     }
 
     @Bean
-    public LoginInterceptor loginInterceptor(){
+    public LoginInterceptor loginInterceptor() {
         return new LoginInterceptor();
     }
+
+    @Bean
+    public CheckPermissionInterceptor checkPermissionInterceptor() {
+        return new CheckPermissionInterceptor();
+    }
+
 
 }

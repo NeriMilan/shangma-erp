@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @TableName("t_b2c_stock_out_manage")
 public class StockOutManage {
-  private Long id;
   @TableId(type = IdType.AUTO)
+  private Long id;
   private Long orderId;
   private String orderType;
   private String orderAction;
@@ -24,7 +24,8 @@ public class StockOutManage {
   private String distributionMode;
   private String orderStatus;
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  private LocalDateTime orderDate;
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+  private LocalDateTime orderDate;
   private Long customerId;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -42,4 +43,7 @@ public class StockOutManage {
   //收货人
   @TableField(exist = false)
   private Customer customer;
+  //记录创建人
+  @TableField(exist = false)
+  private String userName;
 }

@@ -92,6 +92,7 @@
     <result column="update_id" jdbcType="BIGINT" property="updateId" />
     <result column="ext1" jdbcType="VARCHAR" property="ext1" />
     <result column="ext2" jdbcType="VARCHAR" property="ext2" />
+
     <association property="permissionList" javaType="list" column="id" select="selectPermission">
     </association>
   </resultMap>
@@ -118,14 +119,15 @@
         and description like concat('%', #{description}, '%')
       </if>
     </trim>
-    group by id
+    order by id
   </select>
 
-<!--      RoleVO selectVoById(Long id); -->
-  <select id="selectVoById" resultType="com.shangma.entity.system.vo.RoleVO" resultMap="ConditionRoleVo">
+<!--      RoleVO selectVoById(Long id);
+ resultType="com.shangma.entity.system.vo.RoleVO"
+ -->
+  <select id="selectVoById"  resultMap="ConditionRoleVo">
     select <include refid="Base_Column_List"/> from t_system_role where id = #{id}
   </select>
-
 
 <!--  自定义end ==============================================-->
 

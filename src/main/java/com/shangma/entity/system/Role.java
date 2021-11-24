@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("t_system_role")
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Role {
 
     @TableId(type = IdType.AUTO)

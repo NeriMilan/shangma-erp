@@ -43,7 +43,7 @@ public class SalesStatisticsController {
     private SalesStatisticsService statisticsService;
     @Autowired
     private XSSFWorkbook workbook;
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SalesStatisticsController.class);
     @GetMapping("getRank")
     public AxiosResult getRank(
              @RequestParam(defaultValue = "1") Integer currentPage

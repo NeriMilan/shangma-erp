@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @TableName("t_b2c_sales_return_entity_record")
 public class ReturnEntityRecord {
-  private Long id;
   @TableId(type = IdType.AUTO)
+  private Long id;
   private Long orderId;
   private String orderType;
   private String orderAction;
@@ -34,6 +34,11 @@ public class ReturnEntityRecord {
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   private LocalDateTime signoffTime;
+  private String creator;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+  private LocalDateTime creatDate;
+  private String trackingNumber;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")

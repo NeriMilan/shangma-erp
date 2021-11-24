@@ -39,9 +39,6 @@
             <if test="businessType != null and businessType != ''">
                 and business_type like '%${businessType}%'
             </if>
-            <if test="businessType != null and businessType != ''">
-                and business_type like '%${businessType}%'
-            </if>
             <if test="timeFrom != null">
                 and order_date &gt;= '${timeFrom}'
             </if>

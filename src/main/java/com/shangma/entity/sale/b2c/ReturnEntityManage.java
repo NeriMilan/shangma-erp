@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @TableName("t_b2c_sales_return_entity_manage")
 public class ReturnEntityManage {
-  private Long id;
   @TableId(type = IdType.AUTO)
+  private Long id;
   private Long orderId;
   private String orderType;
   private String orderAction;
@@ -35,14 +35,29 @@ public class ReturnEntityManage {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   private LocalDateTime signoffTime;
 
+  private String creator;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+  private LocalDateTime creatDate;
+  private String trackingNumber;
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   @TableField(exist = false)
-  private LocalDateTime timeFrom;
+  // 下单时间
+  private LocalDateTime timeFrom01;
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
   @TableField(exist = false)
-  private LocalDateTime timeTo;
+  private LocalDateTime timeTo01;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+  @TableField(exist = false)
+  // 拒收时间
+  private LocalDateTime timeFrom02;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+  @TableField(exist = false)
+  private LocalDateTime timeTo02;
   //订单商品信息
   @TableField(exist = false)
   private List<OrderGoods> goods;
@@ -52,4 +67,10 @@ public class ReturnEntityManage {
   //退货信息
   @TableField(exist = false)
   private RejectionInfo rejectionInfo;
+  // 客户姓名，用来接收模糊查询信息
+  @TableField(exist = false)
+  private String customerName;
+  // 客户地址，用来接收模糊查询信息
+  @TableField(exist = false)
+  private String customerAddress;
 }

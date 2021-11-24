@@ -1,6 +1,7 @@
 package com.shangma.service.system;
 
 import com.shangma.entity.system.User;
+import com.shangma.entity.system.vo.LoginUserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -28,4 +29,5 @@ public interface UserService {
 
     boolean flushUpdate(Long id, User master);
 
+    //LoginUserVO getLoginUserByUser(User loginUser);
 }
