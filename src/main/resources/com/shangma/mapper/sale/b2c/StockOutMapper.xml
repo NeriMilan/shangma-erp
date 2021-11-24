@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shangma.mapper.sale.b2c.StockOutMapper">
     <select id="findAll" resultType="com.shangma.entity.sale.b2c.StockOutManage">
-        select * from t_b2c_stock_out_manage
+        select * from t_b2c_stock_out_manage where order_status like '%未%'
     </select>
     <select id="search" parameterType="com.shangma.entity.sale.b2c.StockOutManage" resultType="com.shangma.entity.sale.b2c.StockOutManage">
         select * from t_b2c_stock_out_manage
