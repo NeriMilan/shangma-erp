@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goods.GoodsCheckMapper">
+  <resultMap id="BaseResultMap" type="com.shangma.entity.goods.GoodsCheck">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="free_id" jdbcType="BIGINT" property="freeId" />
+    <result column="shop_price" jdbcType="DOUBLE" property="shopPrice" />
+    <result column="change_stocks" jdbcType="INTEGER" property="changeStocks" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="check_opinions" jdbcType="VARCHAR" property="checkOpinions" />
+    <result column="check_by" jdbcType="BIGINT" property="checkBy" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_kind" jdbcType="INTEGER" property="checkKind" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, free_id, shop_price, change_stocks, check_state, check_opinions, check_by, check_time, 
+    check_kind
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_check
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_goods_check
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.shangma.entity.goods.GoodsCheck">
+    insert into t_goods_check (id, free_id, shop_price, 
+      change_stocks, check_state, check_opinions, 
+      check_by, check_time, check_kind
+      )
+    values (#{id,jdbcType=BIGINT}, #{freeId,jdbcType=BIGINT}, #{shopPrice,jdbcType=DOUBLE}, 
+      #{changeStocks,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER}, #{checkOpinions,jdbcType=VARCHAR}, 
+      #{checkBy,jdbcType=BIGINT}, #{checkTime,jdbcType=TIMESTAMP}, #{checkKind,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangma.entity.goods.GoodsCheck">
+    insert into t_goods_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="freeId != null">
+        free_id,
+      </if>
+      <if test="shopPrice != null">
+        shop_price,
+      </if>
+      <if test="changeStocks != null">
+        change_stocks,
+      </if>
+      <if test="checkState != null">
+        check_state,
+      </if>
+      <if test="checkOpinions != null">
+        check_opinions,
+      </if>
+      <if test="checkBy != null">
+        check_by,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="checkKind != null">
+        check_kind,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="freeId != null">
+        #{freeId,jdbcType=BIGINT},
+      </if>
+      <if test="shopPrice != null">
+        #{shopPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeStocks != null">
+        #{changeStocks,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null">
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="checkOpinions != null">
+        #{checkOpinions,jdbcType=VARCHAR},
+      </if>
+      <if test="checkBy != null">
+        #{checkBy,jdbcType=BIGINT},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkKind != null">
+        #{checkKind,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangma.entity.goods.GoodsCheck">
+    update t_goods_check
+    <set>
+      <if test="freeId != null">
+        free_id = #{freeId,jdbcType=BIGINT},
+      </if>
+      <if test="shopPrice != null">
+        shop_price = #{shopPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeStocks != null">
+        change_stocks = #{changeStocks,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null">
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="checkOpinions != null">
+        check_opinions = #{checkOpinions,jdbcType=VARCHAR},
+      </if>
+      <if test="checkBy != null">
+        check_by = #{checkBy,jdbcType=BIGINT},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkKind != null">
+        check_kind = #{checkKind,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangma.entity.goods.GoodsCheck">
+    update t_goods_check
+    set free_id = #{freeId,jdbcType=BIGINT},
+      shop_price = #{shopPrice,jdbcType=DOUBLE},
+      change_stocks = #{changeStocks,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
+      check_opinions = #{checkOpinions,jdbcType=VARCHAR},
+      check_by = #{checkBy,jdbcType=BIGINT},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      check_kind = #{checkKind,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

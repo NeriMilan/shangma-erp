@@ -1,6 +1,6 @@
 package com.shangma.mapper.sale.b2c;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import com.shangma.entity.sale.b2c.Customer;
 import com.shangma.entity.sale.b2c.OrderGoods;
 import com.shangma.entity.sale.b2c.StockOutManage;

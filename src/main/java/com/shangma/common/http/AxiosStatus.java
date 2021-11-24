@@ -12,8 +12,9 @@ public enum AxiosStatus {
 
     ERROR_SYSTEM_LOGIN_NOTFOUND(5410,"登录失败"),
     ERROR_SYSTEM_LOGIN_NOT(5411,"未登录"),
-    ERROR_SYSTEM_ADD(5415,"添加失败");
-
+    ERROR_SYSTEM_ADD(5415,"添加失败"),
+    ERROR_SYSTEM_PERMISSION(5416,"访问权限不足"),
+    ERROR_DATABASE_OPTIONAL(5417,"数据库操作失败");
 
     private int status;
 
