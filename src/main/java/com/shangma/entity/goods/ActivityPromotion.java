@@ -1,4 +1,4 @@
-package com.shangma.entity.goodsEntity;
+package com.shangma.entity.goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

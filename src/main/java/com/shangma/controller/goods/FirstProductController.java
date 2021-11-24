@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shangma.common.http.AxiosResult;
 import com.shangma.common.pagebean.PageBean;
-import com.shangma.controller.base.BaseController;
 import com.shangma.entity.goods.FirstProduct;
 import com.shangma.service.goods.FirstProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("goods/product")
-public class FirstProductController extends BaseController {
+public class FirstProductController {
 
     @Autowired
     public FirstProductService firstProductService;

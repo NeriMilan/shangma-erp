@@ -7,7 +7,7 @@ import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.goodsEntity.Goods;
 import com.shangma.mapper.goodsMapper.GoodsMapper;
 import com.shangma.service.goodsService.GoodsService;
-import com.shangma.service.goodsService.base.impl.BaseServiceImpl;
+import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

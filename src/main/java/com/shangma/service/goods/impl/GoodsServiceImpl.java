@@ -5,7 +5,7 @@ import com.shangma.entity.goods.Goods;
 import com.shangma.entity.system.Role;
 import com.shangma.entity.system.User;
 import com.shangma.mapper.goods.GoodsMapper;
-import com.shangma.service.base.impl.BaseServiceImpl;
+
 import com.shangma.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,4 +39,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper,Goods> implements 
 
         return map;
     }
+    public Integer reduce(Integer num, Long id) {
+        return goodsMapper.reduce(num, id);
+    }
+    
+    
+    //加上商品的数量
+    public Integer plus(Integer num,Long id){
+        return  goodsMapper.plus(num, id);
+    };
 }

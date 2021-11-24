@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goods.ActivityGoodsMapper">
+    <update id="update">
+        update t_activity_goods
+        <set>
+            <if test="freeGoodsId !=null and freeGoodsId !=''">
+                free_goods_id=#{freeGoodsId}
+            </if>
+            <if test="freeGoodsName !=null and freeGoodsName !=''">
+                free_goods_name=#{freeGoodsName}
+            </if>
+            <if test="freeGoodsColor !=null and freeGoodsColor !=''">
+                free_goods_color=#{freeGoodsColor}
+            </if>
+            <if test="freeGoodsNum !=null and freeGoodsNum !=''">
+                free_goods_num=#{freeGoodsNum}
+            </if>
+
+            <if test="freeGoodsResiduals !=null and freeGoodsResiduals !=''">
+                free_goods_residuals=#{freeGoodsResiduals}
+            </if>
+            <if test="freeGoodsMarketPrice !=null and freeGoodsMarketPrice !=''">
+                free_goods_market_price= #{freeGoodsMarketPrice}
+            </if>
+            <if test="freeGoodsShopPrice !=null and freeGoodsShopPrice !=''">
+                free_goods_shop_price=#{freeGoodsShopPrice}
+            </if>
+            <if test="rId !=null and rId !=''">
+                r_id= #{rId}
+            </if>
+        </set>
+    </update>
+
+    <select id="search" resultType="com.shangma.entity.goods.ActivityGoods">
+        <where>
+            <if test="freeGoodsName != null and freeGoodsName != '' ">
+                free_goods_name like "%${freeGoodsName}%"
+            </if>
+        </where>
+    </select>
+
+    <select id="lastId" resultType="java.lang.Long">
+        SELECT *
+        FROM t_price_adjustment
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
+    <insert id="insert">
+        insert into t_activity_goods
+        <trim suffix="(" prefix=")" suffixOverrides=",">
+            <if test="freeGoodsId !=null and freeGoodsId !=''">
+                free_goods_id,
+            </if>
+            <if test="freeGoodsName !=null and freeGoodsName !=''">
+                free_goods_name,
+            </if>
+            <if test="freeGoodsColor !=null and freeGoodsColor !=''">
+                free_goods_color,
+            </if>
+            <if test="freeGoodsNum !=null and freeGoodsNum !=''">
+                free_goods_num,
+            </if>
+
+            <if test="freeGoodsResiduals !=null and freeGoodsResiduals !=''">
+                free_goods_residuals,
+            </if>
+            <if test="freeGoodsMarketPrice !=null and freeGoodsMarketPrice !=''">
+                free_goods_market_price,
+            </if>
+            <if test="freeGoodsShopPrice !=null and freeGoodsShopPrice !=''">
+                free_goods_shop_price,
+            </if>
+            <if test="rId !=null and rId !=''">
+                r_id,
+            </if>
+        </trim>
+        values
+        <trim suffix="(" prefix=")" suffixOverrides=",">
+            <if test="freeGoodsId !=null and freeGoodsId !=''">
+                #{freeGoodsId}
+            </if>
+            <if test="freeGoodsName !=null and freeGoodsName !=''">
+                #{freeGoodsName}
+            </if>
+            <if test="freeGoodsColor !=null and freeGoodsColor !=''">
+                #{freeGoodsColor}
+            </if>
+            <if test="freeGoodsNum !=null and freeGoodsNum !=''">
+                #{freeGoodsNum}
+            </if>
+
+            <if test="freeGoodsResiduals !=null and freeGoodsResiduals !=''">
+                #{freeGoodsResiduals}
+            </if>
+            <if test="freeGoodsMarketPrice !=null and freeGoodsMarketPrice !=''">
+                #{freeGoodsMarketPrice}
+            </if>
+            <if test="freeGoodsShopPrice !=null and freeGoodsShopPrice !=''">
+                #{freeGoodsShopPrice}
+            </if>
+            <if test="rId !=null and rId !=''">
+                #{rId}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

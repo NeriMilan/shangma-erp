@@ -1,12 +1,12 @@
-package com.shangma.service.goodsService.impl;
+package com.shangma.service.goods.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shangma.common.pagebean.PageBean;
-import com.shangma.entity.goodsEntity.PriceAdjustment;
-import com.shangma.mapper.goodsMapper.PriceAdjustmentMapper;
-import com.shangma.service.goodsService.PriceAdjustmentService;
-import com.shangma.service.goodsService.base.impl.BaseServiceImpl;
+import com.shangma.entity.goods.PriceAdjustment;
+import com.shangma.mapper.goods.PriceAdjustmentMapper;
+import com.shangma.service.goods.PriceAdjustmentService;
+import com.shangma.service.goods.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

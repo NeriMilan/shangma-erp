@@ -1,7 +1,6 @@
-package com.shangma.mapper.goodsMapper;
+package com.shangma.mapper.goods;
 
-import com.shangma.common.pagebean.PageBean;
-import com.shangma.entity.goodsEntity.PriceAdjustment;
+import com.shangma.entity.goods.PriceAdjustment;
 import com.shangma.mapper.base.MyMapper;
 
 import java.util.List;

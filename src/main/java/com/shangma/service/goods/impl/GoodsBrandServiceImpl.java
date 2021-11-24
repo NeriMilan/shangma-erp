@@ -6,7 +6,6 @@ import com.github.pagehelper.PageInfo;
 import com.shangma.entity.goods.GoodsBrand;
 import com.shangma.mapper.goods.GoodsBrandMapper;
 import com.shangma.service.goods.GoodsBrandService;
-import com.shangma.service.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

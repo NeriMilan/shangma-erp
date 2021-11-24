@@ -71,6 +71,16 @@
             </if>
         </where>
     </select>
+    <select id="reduce" resultType="java.lang.Long">
+        update t_goods
+        <set>
+            <if test="num!=null and num!=''">
+
+            </if>
+        </set>
+        where id=#{id}
+
+    </select>
     <update id="freeToGoods" parameterType="com.shangma.entity.goods.FreeGoods">
         update t_free_goods
             INNER JOIN t_goods

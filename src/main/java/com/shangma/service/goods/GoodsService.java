@@ -3,7 +3,7 @@ package com.shangma.service.goods;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.shangma.entity.goods.Goods;
-import com.shangma.service.base.BaseService;
+
 
 import java.util.List;
 
@@ -18,5 +18,10 @@ public interface GoodsService extends IService<Goods> {
      */
 
     List getAll(Goods goods);
-
+    
+    //减去商品的数量
+    Integer reduce(Integer num,Long id);
+    
+    //加上商品的数量
+    Integer plus(Integer num,Long id);
 }

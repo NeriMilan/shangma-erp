@@ -1,4 +1,4 @@
-package com.shangma.service.goodsService.base;
+package com.shangma.service.goods.base;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
