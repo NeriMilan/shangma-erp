@@ -55,6 +55,7 @@
 <!--        <table tableName="t_system_job" domainObjectName="Job"/>-->
 <!--        <table tableName="t_system_department" domainObjectName="Department"/>-->
 
+                <table tableName="t_system_log" domainObjectName="SystemLog"></table>
 
 
 

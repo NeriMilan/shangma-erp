@@ -17,7 +17,7 @@ import java.util.List;
  * @CreateTime: 2021/11/23  17:24
  */
 @Service
-public class StockRecordService extends BaseServiceImpl<StockOutRecord> implements com.shangma.service.sale.b2c.StockRecordService {
+public class StockRecordServiceImpl extends BaseServiceImpl<StockOutRecord> implements com.shangma.service.sale.b2c.StockRecordService {
     @Autowired
     private StockRecordMapper stockRecordMapper;
     @Override

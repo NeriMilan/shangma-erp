@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.system.SystemLogMapper">
+    <resultMap id="BaseResultMap" type="com.shangma.entity.system.SystemLog">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="module" jdbcType="VARCHAR" property="module"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="department_id" jdbcType="BIGINT" property="departmentId"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="ext2" jdbcType="VARCHAR" property="ext2"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id
+        , time, username, module, description, department_id, ip, login_name, ext1, ext2
+    </sql>
+
+    <!--  自定义 start ================================================================= -->
+
+    <!--      List<SystemLog> condition(SystemLogVO systemLogVO);  -->
+    <select id="condition" resultType="com.shangma.entity.system.SystemLog">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_log
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="departmentId != null">
+                department_id = #{departmentId}
+            </if>
+            <if test="module != null">
+                and module = #{module}
+            </if>
+            <if test="startTime != null">
+                and time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                and time &lt;= #{endTime}
+            </if>
+            <if test="username != null">
+                and username like concat('%', #{username}, '%')
+            </if>
+            <if test="loginName != null">
+                and login_name like concat('%', #{loginName}, '%')
+            </if>
+            <if test="description != null">
+                and description like concat('%', #{description}, '%')
+            </if>
+        </trim>
+    order by id
+    </select>
+
+    <!--  自定义 end ================================================================= -->
+
+
+    <select id="selectByExample" parameterType="com.shangma.entity.system.SystemLogExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_system_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_system_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.shangma.entity.system.SystemLogExample">
+        delete from t_system_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.shangma.entity.system.SystemLog">
+        insert into t_system_log (id, time, username,
+                                  module, description, department_id,
+                                  ip, login_name, ext1,
+                                  ext2)
+        values (#{id,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR},
+                #{module,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT},
+                #{ip,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR},
+                #{ext2,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.shangma.entity.system.SystemLog">
+        insert into t_system_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="module != null">
+                module,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="ext1 != null">
+                ext1,
+            </if>
+            <if test="ext2 != null">
+                ext2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="module != null">
+                #{module,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                #{ext2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.shangma.entity.system.SystemLogExample" resultType="java.lang.Long">
+        select count(*) from t_system_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_system_log
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.time != null">
+                time = #{record.time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.module != null">
+                module = #{record.module,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description,jdbcType=VARCHAR},
+            </if>
+            <if test="record.departmentId != null">
+                department_id = #{record.departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="record.ip != null">
+                ip = #{record.ip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.loginName != null">
+                login_name = #{record.loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext1 != null">
+                ext1 = #{record.ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ext2 != null">
+                ext2 = #{record.ext2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_system_log
+        set id = #{record.id,jdbcType=BIGINT},
+        time = #{record.time,jdbcType=TIMESTAMP},
+        username = #{record.username,jdbcType=VARCHAR},
+        module = #{record.module,jdbcType=VARCHAR},
+        description = #{record.description,jdbcType=VARCHAR},
+        department_id = #{record.departmentId,jdbcType=BIGINT},
+        ip = #{record.ip,jdbcType=VARCHAR},
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+        ext1 = #{record.ext1,jdbcType=VARCHAR},
+        ext2 = #{record.ext2,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shangma.entity.system.SystemLog">
+        update t_system_log
+        <set>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="module != null">
+                module = #{module,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="ext1 != null">
+                ext1 = #{ext1,jdbcType=VARCHAR},
+            </if>
+            <if test="ext2 != null">
+                ext2 = #{ext2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shangma.entity.system.SystemLog">
+        update t_system_log
+        set time          = #{time,jdbcType=TIMESTAMP},
+            username      = #{username,jdbcType=VARCHAR},
+            module        = #{module,jdbcType=VARCHAR},
+            description   = #{description,jdbcType=VARCHAR},
+            department_id = #{departmentId,jdbcType=BIGINT},
+            ip            = #{ip,jdbcType=VARCHAR},
+            login_name    = #{loginName,jdbcType=VARCHAR},
+            ext1          = #{ext1,jdbcType=VARCHAR},
+            ext2          = #{ext2,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

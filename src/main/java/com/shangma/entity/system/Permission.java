@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("t_system_permission")
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Permission {
 
     @TableId(type = IdType.AUTO)
@@ -22,10 +21,16 @@ public class Permission {
 
     private String name;
 
+    /**
+     权限描述
+     */
     private String description;
 
     private Long status;
 
+    /**
+     <strong color='red'>可操作项( 对应 operate的location )</strong>
+     */
     private String operate;
 
     private LocalDateTime createTime;
@@ -36,8 +41,17 @@ public class Permission {
 
     private Long updateId;
 
+    /**
+        <strong color='red'>     (权限范围, 可执行操作描述) 对应 operate的description
+     </strong>
+     */
     private String ext1;
 
+    /**
+        <strong color = 'red'>
+     操作项id
+     </strong>
+     */
     private String ext2;
 
 }
