@@ -23,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("goods/brand")
-public class GoodsBrandController extends BaseController {
+public class GoodsBrandController {
     @Resource
     private GoodsBrandService goodsBrandService;
 
