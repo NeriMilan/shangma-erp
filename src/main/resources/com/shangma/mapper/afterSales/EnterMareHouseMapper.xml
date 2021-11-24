@@ -17,12 +17,12 @@
             <if test="producer!=null and producer!=''">
                 and producer like '%${producer}%'
             </if>
-            <if test="startTime !=null and startTime != ''">
+           <!-- <if test="startTime !=null and startTime != ''">
                 and produce_time &gt;='${startTime}'
             </if>
             <if test="endTime != null and endTime != ''">
                 and produce_time &lt;='${endTime}'
-            </if>
+            </if>-->
             <if test="approver !=null and approver != ''">
                 and approver like '%${approver}%'
             </if>
@@ -30,9 +30,8 @@
                 and approverStatus like '%${approverStatus}%'
             </if>
         </where>
-
-
     </select>
+
 
 
 

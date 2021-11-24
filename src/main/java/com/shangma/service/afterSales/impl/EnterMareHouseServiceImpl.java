@@ -12,8 +12,26 @@ public class EnterMareHouseServiceImpl implements EnterMareHouseService {
 @Autowired
 private EnterMareHouseMapper enterMareHouseMapper;
 
+
     @Override
     public List<EnterMareHouse> selectBySearch(EnterMareHouse enterMareHouse) {
         return enterMareHouseMapper.selectBySearch(enterMareHouse);
     }
+
+    @Override
+    public int delByids(List<Long> ids) {
+        return enterMareHouseMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public int insert(EnterMareHouse enterMareHouse) {
+        return enterMareHouseMapper.insert(enterMareHouse);
+    }
+
+    @Override
+    public EnterMareHouse findById(Long id) {
+        return enterMareHouseMapper.selectById(id);
+    }
+
+
 }
