@@ -42,7 +42,7 @@ public class GoodsBrandController {
     /**
      * 根据名字查询
      */
-    @GetMapping("/{pageNum}/{pageSize}/{brandName}")
+    @GetMapping("/find/{pageNum}/{pageSize}/{brandName}")
     public AxiosResult find(@PathVariable int pageNum, @PathVariable int pageSize, @PathVariable String brandName) {
         PageHelper.startPage(pageNum, pageSize);
         QueryWrapper<GoodsBrand> wrapper = new QueryWrapper();
