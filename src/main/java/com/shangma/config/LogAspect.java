@@ -33,7 +33,7 @@ public class LogAspect {
     @Autowired
     private HttpServletRequest request;
 
-    @Around("execution(* com.shangma.service..*.*(..))&&!execution(* com.shangma.service.system.impl.UserServiceImpl.listByLoginNameAndPassword(..))&&!execution(* com.shangma.service.sale.b2c.base.impl.BaseServiceImpl.insert(..))&&!execution(* com.shangma.service.system.impl.UserServiceImpl.getById(..))")
+    @Around("execution(* com.shangma.service..*.*(..))&&!execution(* com.shangma.service.system.impl.UserServiceImpl.listByLoginNameAndPassword(..))&&!execution(* com.shangma.service.sale.b2c.base.impl.BaseServiceImpl.insert(..))&&!execution(* com.shangma.service.system.impl.UserServiceImpl.getById(..))&&!execution(* com.shangma.service.system.impl.PermissionServiceImpl.getDownloadRows(..))")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         User user= (User)request.getSession().getAttribute("user");
