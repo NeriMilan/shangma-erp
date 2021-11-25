@@ -226,7 +226,7 @@ public class FreeGoodsController {
     public AxiosResult freeToGoodsCheckOK2(@RequestBody GoodsCheck goodsCheck) {
         goodsCheck.setCheckState(1);
         goodsCheckService.updateById(goodsCheck);
-        Long id = freeGoodsService.getById(goodsCheck.getFreeId()).getId();
+        Long id = goodsCheck.getFreeId();
         boolean check = freeGoodsService.goodsToFree(id, goodsCheck.getChangeStocks());
         if (!check) {
             return AxiosResult.error();

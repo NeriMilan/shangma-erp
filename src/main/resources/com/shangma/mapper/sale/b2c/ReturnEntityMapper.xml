@@ -25,16 +25,16 @@
             t1.rejection_reason like '%${rejectionReason}%'
         </if>
         <if test="timeFrom01 !=null">
-            and t1.order_date &gt;= '${timeFrom}'
+            and t1.order_date &gt;= '${timeFrom01}'
         </if>
         <if test="timeTo01 != null">
-            and t1.order_date &lt;= '${timeTo}'
+            and t1.order_date &lt;= '${timeTo01}'
         </if>
         <if test="timeFrom02 !=null">
-        and t1.order_date &gt;= '${timeFrom}'
+        and t1.order_date &gt;= '${timeFrom02}'
         </if>
         <if test="timeTo02 != null">
-            and t1.order_date &lt;= '${timeTo}'
+            and t1.order_date &lt;= '${timeTo02}'
         </if>
     </select>
     <select id="findById" parameterType="Long" resultType="com.shangma.entity.sale.b2c.ReturnEntityManage">

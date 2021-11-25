@@ -38,7 +38,7 @@ public class GoodsTypeController {
     /**
      * 根据名字查询
      */
-    @GetMapping("/{pageNum}/{pageSize}/{typeName}")
+    @GetMapping("/find/{pageNum}/{pageSize}/{typeName}")
     public AxiosResult find(@PathVariable int pageNum, @PathVariable int pageSize, @PathVariable String typeName) {
         PageHelper.startPage(pageNum, pageSize);
         QueryWrapper<GoodsType> wrapper = new QueryWrapper();
