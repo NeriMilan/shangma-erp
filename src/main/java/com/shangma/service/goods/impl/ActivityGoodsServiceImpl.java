@@ -41,6 +41,8 @@ public class ActivityGoodsServiceImpl extends BaseServiceImpl<ActivityGoods> imp
     
     
     public int add(ActivityGoods activityGoods) {
+        System.out.println("===============================");
+        System.out.println(activityGoods);
         return mapper.insert(activityGoods);
     }
     

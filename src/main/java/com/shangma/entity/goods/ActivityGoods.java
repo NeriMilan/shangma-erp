@@ -15,7 +15,7 @@ public class ActivityGoods {
 
     private String freeGoodsName;
 
-    private String freeGoodModel;
+    private String freeGoodsModel;
 
     private String freeGoodsColor;
 

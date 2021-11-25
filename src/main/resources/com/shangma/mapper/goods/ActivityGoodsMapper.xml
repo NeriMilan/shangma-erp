@@ -42,18 +42,21 @@
 
     <select id="lastId" resultType="java.lang.Long">
         SELECT *
-        FROM t_price_adjustment
+        FROM t_activity_goods
         ORDER BY id DESC
         LIMIT 1
     </select>
     <insert id="insert">
         insert into t_activity_goods
-        <trim suffix="(" prefix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="freeGoodsId !=null and freeGoodsId !=''">
                 free_goods_id,
             </if>
             <if test="freeGoodsName !=null and freeGoodsName !=''">
                 free_goods_name,
+            </if>
+            <if test="freeGoodsModel !=null and freeGoodsModel !=''">
+                free_goods_model,
             </if>
             <if test="freeGoodsColor !=null and freeGoodsColor !=''">
                 free_goods_color,
@@ -76,31 +79,34 @@
             </if>
         </trim>
         values
-        <trim suffix="(" prefix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="freeGoodsId !=null and freeGoodsId !=''">
-                #{freeGoodsId}
+                #{freeGoodsId},
             </if>
             <if test="freeGoodsName !=null and freeGoodsName !=''">
-                #{freeGoodsName}
+                #{freeGoodsName},
+            </if>
+            <if test="freeGoodsModel !=null and freeGoodsModel !=''">
+                #{freeGoodsModel},
             </if>
             <if test="freeGoodsColor !=null and freeGoodsColor !=''">
-                #{freeGoodsColor}
+                #{freeGoodsColor},
             </if>
             <if test="freeGoodsNum !=null and freeGoodsNum !=''">
-                #{freeGoodsNum}
+                #{freeGoodsNum},
             </if>
 
             <if test="freeGoodsResiduals !=null and freeGoodsResiduals !=''">
-                #{freeGoodsResiduals}
+                #{freeGoodsResiduals},
             </if>
             <if test="freeGoodsMarketPrice !=null and freeGoodsMarketPrice !=''">
-                #{freeGoodsMarketPrice}
+                #{freeGoodsMarketPrice},
             </if>
             <if test="freeGoodsShopPrice !=null and freeGoodsShopPrice !=''">
-                #{freeGoodsShopPrice}
+                #{freeGoodsShopPrice},
             </if>
             <if test="rId !=null and rId !=''">
-                #{rId}
+                #{rId},
             </if>
         </trim>
     </insert>

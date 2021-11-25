@@ -4,7 +4,7 @@
 
     <select id="lastId" resultType="java.lang.Long">
         SELECT *
-        FROM t_price_adjustment
+        FROM t_winning_record
         ORDER BY id DESC
         LIMIT 1
     </select>

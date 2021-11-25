@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("Market")
+@RequestMapping("market")
 public class ActivityMarketController {
     @Autowired
     private ActivityMarketService marketService;
@@ -30,14 +30,20 @@ public class ActivityMarketController {
      * 模糊查询加分页
      */
     @PostMapping("search")
-    public AxiosResult<PageBean<ActivityMarket>> search(@RequestBody ActivityMarket market, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "pageNum") Integer pageNumber) {
+    public AxiosResult<PageBean<ActivityMarket>> search(@RequestBody ActivityMarket market, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "pageNumber") Integer pageNumber) {
         
         PageBean<ActivityMarket> search = marketService.search(market, pageNumber, pageSize);
         return AxiosResult.success(search);
     }
     
+    /**
+     * 使用了plus 无法查询单个
+     * @param id
+     * @return
+     */
     @GetMapping("find/{id}")
     public AxiosResult<ActivityMarket> findById(@PathVariable Long id) {
+        System.out.println(id);
         ActivityMarket market = marketService.findById(id);
         return AxiosResult.success(market);
     }

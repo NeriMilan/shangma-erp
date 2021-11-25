@@ -13,10 +13,10 @@
             <if test="activityName !=null and activityName != '' ">
                 activity_name,
             </if>
-            <if test="activityType != null activityType != '' ">
+            <if test="activityType != null and activityType != '' ">
                 activity_type,
             </if>
-            <if test="auditState != null auditState != '' ">
+            <if test="auditState != null and auditState != '' ">
                 audit_state,
             </if>
             <if test="auditPeople !=null and auditPeople != '' ">
@@ -46,10 +46,10 @@
             <if test="activityName !=null and activityName != '' ">
                 #{activityName},
             </if>
-            <if test="activityType != null activityType != '' ">
+            <if test="activityType != null and activityType != '' ">
                 #{activityType},
             </if>
-            <if test="auditState != null auditState != '' ">
+            <if test="auditState != null and auditState != '' ">
                 #{auditState},
             </if>
             <if test="auditPeople !=null and auditPeople != '' ">
@@ -118,8 +118,9 @@
     </update>
 
     <select id="search" resultMap="activityList">
-        select * from t_activity_promotion a,t_price_adjustment p on a.p_id = p.id
+        select * from t_activity_promotion a,t_price_adjustment p
         <where>
+            a.p_id = p.id
             <if test="goodsName != null and goodsName != ''">
                 and goods_name like "%${goodsName}%"
             </if>

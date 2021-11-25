@@ -47,9 +47,12 @@
     </update>
 
     <select id="search" resultMap="MarketAndGoods">
-        select * from t_free_goods on m.g_id = g.id
-        and g.r_id = r.id
+        select *
+        from t_activity_market m,
+        t_activity_goods g,
+        t_winning_record r
         <where>
+             m.g_id = g.id and g.r_id = r.id
             <if test="activityName != null and activityName != ''">
                 activity_name like "%${activityName}%"
             </if>
@@ -62,8 +65,8 @@
             <if test="activityEnd != null and activityEnd != ''">
                 and activity_end &lt;= #{activityEnd}
             </if>
-            <if test="approvalStatus != null and approvalStatus != ''">
-                and approval_status =#{approvalStatus}
+            <if test="approvalState != null and approvalState != ''">
+                and approval_state =#{approvalState}
             </if>
         </where>
     </select>
@@ -93,7 +96,7 @@
         <collection property="activityGoods" ofType="com.shangma.entity.goods.ActivityGoods">
             <result property="freeGoodsId" column="free_goods_id"/>
             <result property="freeGoodsName" column="free_goods_name"/>
-            <result property="freeGoodModel" column="free_goods_model"/>
+            <result property="freeGoodsModel" column="free_goods_model"/>
             <result property="freeGoodsColor" column="free_goods_color"/>
             <result property="freeGoodsNum" column="free_goods_num"/>
             <result property="freeGoodsResiduals" column="free_goods_residuals"/>
@@ -111,7 +114,7 @@
     <insert id="insert">
         insert into t_activity_market
 
-        <trim suffix="(" prefix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="activityName != null and activityName!= ''">
                 activity_name,
             </if>
@@ -153,7 +156,7 @@
             </if>
         </trim>
         value
-        <trim suffix="(" prefix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="activityName != null and activityName!= ''">
                 #{activityName},
             </if>

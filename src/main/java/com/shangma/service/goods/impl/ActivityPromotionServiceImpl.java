@@ -64,7 +64,8 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
 
         //将id注入activityPromotion
         activityPromotion.setPId(lastId);
-
+        System.out.println("===========================");
+        System.out.println(activityPromotion);
         //在活动表中加上该条数据
         int row = mapper.insert(activityPromotion);
 
@@ -99,7 +100,8 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
         //取出增加活动商品的数量和商品id
         Integer discountNum = activityPromotion.getPriceAdjustment().getDiscountNum();
         Long id = activityPromotion.getPriceAdjustment().getGoodsId();
-
+        Long pId = activityPromotion.getPId();
+    
         if (activityPromotion.getAuditState() == 1) {
             //当审核通过时再次去物品表去查询该物品的数量，防止数据库中商品数量为负数
             Integer GoodsNum = goodsService.getById(id).getMinStocks();
@@ -112,6 +114,8 @@ public class ActivityPromotionServiceImpl extends BaseServiceImpl<ActivityPromot
             }else {
                 //库存小于转移量，将转移所有库存
                 activityPromotion.getPriceAdjustment().setDiscountNum(GoodsNum);
+                activityPromotion.getPriceAdjustment().setId(pId);
+                priceService.update(activityPromotion.getPriceAdjustment());
                 goodsService.reduce(GoodsNum, id);
                 return mapper.update(activityPromotion);
             }
