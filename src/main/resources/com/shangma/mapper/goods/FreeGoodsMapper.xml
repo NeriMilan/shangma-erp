@@ -27,7 +27,7 @@
     <select id="getFreeGoodsList" resultMap="BaseResultMap">
         SELECT
         t_free_goods.id,
-        t_free_goods.goods_pid
+        t_free_goods.goods_pid,
         t_free_goods.type_id,
         t_free_goods.brand_id,
         t_free_goods.goods_model,
@@ -36,15 +36,12 @@
         t_free_goods.unit_price,
         t_free_goods.buy_price,
         t_free_goods.min_stocks,
-        t_free_goods.id,
         t_goods_type.type_name,
-        t_free_goods.id,
         t_goods_brand.brand_name
         FROM
         t_free_goods
         LEFT JOIN t_goods_type ON t_free_goods.type_id = t_goods_type.id LEFT JOIN t_goods_brand ON
-        t_free_goods.brand_id =
-        t_goods_brand.id
+        t_free_goods.brand_id = t_goods_brand.id
         <where>
             <if test="goodsName != null and goodsName != ''">
                 AND t_free_goods.goods_name LIKE CONCAT('%', #{goodsName} ,'%')
@@ -95,23 +92,22 @@
             INNER JOIN t_goods
         ON t_free_goods.goods_pid = t_goods.id
             set t_free_goods.min_stocks =t_free_goods.min_stocks + #{addStocks},
-                t_goods.min_stocks=t_goods.min_stocks - #{addStocks},
-        where t_goods.id = #{id}
+                t_goods.min_stocks=t_goods.min_stocks - #{addStocks}
+        where t_free_goods.id = #{id}
     </update>
-<!--    <insert id="insertGoodsCheck" parameterType="com.shangma.entity.GoodsCheck">-->
-<!--        insert into t_goods_check (free_id, shop_price,-->
-<!--                                   change_stocks, goods_state, check_opinions,-->
-<!--                                   check_by)-->
-<!--        values (#{freeId,jdbcType=BIGINT}, #{shopPrice,jdbcType=DOUBLE},-->
-<!--                #{changeStocks,jdbcType=INTEGER}, 0, #{checkOpinions,jdbcType=VARCHAR},-->
-<!--                #{checkBy,jdbcType=BIGINT})-->
-<!--    </insert>-->
-<!--    <update id="freeToGoodsState" parameterType="com.shangma.entity.GoodsCheck">-->
-<!--        update t_goods_check-->
-<!--        set goods_state = #{goodsState,jdbcType=INTEGER}-->
-<!--        where t_goods_check.id = #{id}-->
-<!--    </update>-->
-
+    <!--    <insert id="insertGoodsCheck" parameterType="com.shangma.entity.GoodsCheck">-->
+    <!--        insert into t_goods_check (free_id, shop_price,-->
+    <!--                                   change_stocks, goods_state, check_opinions,-->
+    <!--                                   check_by)-->
+    <!--        values (#{freeId,jdbcType=BIGINT}, #{shopPrice,jdbcType=DOUBLE},-->
+    <!--                #{changeStocks,jdbcType=INTEGER}, 0, #{checkOpinions,jdbcType=VARCHAR},-->
+    <!--                #{checkBy,jdbcType=BIGINT})-->
+    <!--    </insert>-->
+    <!--    <update id="freeToGoodsState" parameterType="com.shangma.entity.GoodsCheck">-->
+    <!--        update t_goods_check-->
+    <!--        set goods_state = #{goodsState,jdbcType=INTEGER}-->
+    <!--        where t_goods_check.id = #{id}-->
+    <!--    </update>-->
 
 
 </mapper>

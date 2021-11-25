@@ -93,9 +93,9 @@ public class CheckPermissionInterceptor implements HandlerInterceptor {
             return true;
 
         // todo 填充数据用
-        injectToOperate(targetLocation);
-
-        injectServletPath(request);
+        //injectToOperate(targetLocation);
+        //
+        //injectServletPath(request);
 
 
         User user = (User)request.getSession().getAttribute("user");

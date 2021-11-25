@@ -38,7 +38,7 @@ public class FirstProductController {
     /**
      * 产品查询
      */
-    @PostMapping("/{pageNum}/{pageSize}")
+    @PostMapping("find/{pageNum}/{pageSize}")
     public AxiosResult getAll(@RequestBody FirstProduct firstProduct, @PathVariable int pageNum, @PathVariable int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<FirstProduct> list = firstProductService.getAll(firstProduct);
