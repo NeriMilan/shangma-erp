@@ -14,6 +14,7 @@ spring:
     password: "0000"  # yaml类型默认数值计算, 需要引号
 
 mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml # 此即为默认值
   configuration:
     map-underscore-to-camel-case: true
 
@@ -22,13 +23,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-
-mybatis:
-  log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
-  configuration:
-    cache-enabled: false #禁用二级缓存
-    local-cache-scope: statement #一级缓存指定为statement级别
-logging:
-  level:
-    com.shangma: debug

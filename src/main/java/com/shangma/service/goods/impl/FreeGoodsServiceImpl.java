@@ -49,4 +49,8 @@ public class FreeGoodsServiceImpl extends ServiceImpl<FreeGoodsMapper, FreeGoods
     public boolean goodsToFree(Long id, Integer addStocks) {
         return freeGoodsMapper.goodsToFree(id,addStocks)  == 1 ? false : true;
     }
+    
+   public Long reduce(Integer num,Long id){
+   return      freeGoodsMapper.reduce(num,id);
+    };
 }

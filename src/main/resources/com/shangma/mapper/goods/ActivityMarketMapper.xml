@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.goods.ActivityMarketMapper">
+    <update id="update">
+        update t_activity_market
+        <set>
+            <if test="activityName != null and activityName!= ''">
+                activity_name=#{activityName},
+            </if>
+            <if test="rewardWay !=null and rewardWay != '' ">
+                reward_way= #{rewardWay},
+            </if>
+            <if test="applicant != null and applicant!= ''">
+                applicant= #{applicant},
+            </if>
+            <if test="activityStart !=null and activityStart != '' ">
+                activity_start=#{activityStart},
+            </if>
+            <if test="activityEnd !=null and activityEnd != '' ">
+                activity_end=#{activityEnd},
+            </if>
+            <if test="freebiesId != null and freebiesId!= ''">
+                freebies_id=#{freebiesId},
+            </if>
+            <if test="freebiesNum !=null and freebiesNum != '' ">
+                freebies_num= #{freebiesNum},
+            </if>
+            <if test="applicationMatters !=null and applicationMatters != '' ">
+                application_matters#{applicationMatters},
+            </if>
+            <if test="approvalPeople != null and approvalPeople!= ''">
+                approval_people=#{approvalPeople},
+            </if>
+            <if test="approvalTime !=null and approvalTime != '' ">
+                approval_time #{approvalTime},
+            </if>
+            <if test="approvalState !=null and approvalState != '' ">
+                approval_state#{approvalState},
+            </if>
+            <if test="approvalOpinion !=null and approvalOpinion != '' ">
+                approval_opinion#{approvalOpinion},
+            </if>
+            <if test="gId !=null and gId != '' ">
+                g_id=#{gId},
+            </if>
+        </set>
+    </update>
+
+    <select id="search" resultMap="MarketAndGoods">
+        select *
+        from t_activity_market m,
+        t_activity_goods g,
+        t_winning_record r
+        <where>
+             m.g_id = g.id and g.r_id = r.id
+            <if test="activityName != null and activityName != ''">
+                activity_name like "%${activityName}%"
+            </if>
+            <if test="rewardWay !=null and rewardWay != ''">
+                and reward_way=#{rewardWay}
+            </if>
+            <if test="activityStart != null and activityStart != ''">
+                and activity_start &gt;= #{activityStart}
+            </if>
+            <if test="activityEnd != null and activityEnd != ''">
+                and activity_end &lt;= #{activityEnd}
+            </if>
+            <if test="approvalState != null and approvalState != ''">
+                and approval_state =#{approvalState}
+            </if>
+        </where>
+    </select>
+    <select id="selectList" resultMap="MarketAndGoods">
+        select *
+        from t_activity_market m,
+             t_activity_goods g,
+             t_winning_record r
+        where m.g_id = g.id
+          and g.r_id = r.id
+    </select>
+    <resultMap id="MarketAndGoods" type="com.shangma.entity.goods.ActivityMarket">
+        <id property="id" column="id"/>
+        <result property="activityName" column="activity_name"/>
+        <result property="rewardWay" column="reward_way"/>
+        <result property="applicant" column="applicant"/>
+        <result property="activityStart" column="activity_start"/>
+        <result property="activityEnd" column="activity_end"/>
+        <result property="freebiesId" column="freebies-id"/>
+        <result property="freebiesNum" column="freebies_num"/>
+        <result property="applicationMatters" column="application_matters"/>
+        <result property="approvalPeople" column="approval_people"/>
+        <result property="approvalTime" column="approval_time"/>
+        <result property="approvalState" column="approval_state"/>
+        <result property="approvalOpinion" column="approval_opinion"/>
+        <result property="gId" column="g_id"/>
+        <collection property="activityGoods" ofType="com.shangma.entity.goods.ActivityGoods">
+            <result property="freeGoodsId" column="free_goods_id"/>
+            <result property="freeGoodsName" column="free_goods_name"/>
+            <result property="freeGoodsModel" column="free_goods_model"/>
+            <result property="freeGoodsColor" column="free_goods_color"/>
+            <result property="freeGoodsNum" column="free_goods_num"/>
+            <result property="freeGoodsResiduals" column="free_goods_residuals"/>
+            <result property="freeGoodsMarketPrice" column="free_goods_market_price"/>
+            <result property="freeGoodsShopPrice" column="free_goods_shop_price"/>
+            <result property="rId" column="r_id"/>
+            <association property="winningRecord" javaType="com.shangma.entity.goods.WinningRecord">
+                <result property="contactPerson" column="contact_person"/>
+                <result property="contactAddress" column="contact_address"/>
+                <result property="contactPhone" column="contact_phone"/>
+                <result property="idCard" column="id_card"/>
+            </association>
+        </collection>
+    </resultMap>
+    <insert id="insert">
+        insert into t_activity_market
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityName != null and activityName!= ''">
+                activity_name,
+            </if>
+            <if test="rewardWay !=null and rewardWay != '' ">
+                reward_way,
+            </if>
+            <if test="applicant != null and applicant!= ''">
+                applicant,
+            </if>
+            <if test="activityStart !=null and activityStart != '' ">
+                activity_start,
+            </if>
+            <if test="activityEnd !=null and activityEnd != '' ">
+                activity_end,
+            </if>
+            <if test="freebiesId != null and freebiesId!= ''">
+                freebies_id,
+            </if>
+            <if test="freebiesNum !=null and freebiesNum != '' ">
+                freebies_num,
+            </if>
+            <if test="applicationMatters !=null and applicationMatters != '' ">
+                application_matters,
+            </if>
+            <if test="approvalPeople != null and approvalPeople!= ''">
+                approval_people,
+            </if>
+            <if test="approvalTime !=null and approvalTime != '' ">
+                approval_time,
+            </if>
+            <if test="approvalState !=null and approvalState != '' ">
+                activity_state,
+            </if>
+            <if test="approvalOpinion !=null and approvalOpinion != '' ">
+                approval_opinion,
+            </if>
+            <if test="gId !=null and gId != '' ">
+                g_id,
+            </if>
+        </trim>
+        value
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityName != null and activityName!= ''">
+                #{activityName},
+            </if>
+            <if test="rewardWay !=null and rewardWay != '' ">
+                #{rewardWay},
+            </if>
+            <if test="applicant != null and applicant!= ''">
+                #{applicant},
+            </if>
+            <if test="activityStart !=null and activityStart != '' ">
+                #{activityStart},
+            </if>
+            <if test="activityEnd !=null and activityEnd != '' ">
+                #{activityEnd},
+            </if>
+            <if test="freebiesId != null and freebiesId!= ''">
+                #{freebiesId},
+            </if>
+            <if test="freebiesNum !=null and freebiesNum != '' ">
+                #{freebiesNum},
+            </if>
+            <if test="applicationMatters !=null and applicationMatters != '' ">
+                #{applicationMatters},
+            </if>
+            <if test="approvalPeople != null and approvalPeople!= ''">
+                #{approvalPeople},
+            </if>
+            <if test="approvalTime !=null and approvalTime != '' ">
+                #{approvalTime},
+            </if>
+            <if test="approvalState !=null and approvalState != '' ">
+                #{approvalState},
+            </if>
+            <if test="approvalOpinion !=null and approvalOpinion != '' ">
+                #{approvalOpinion},
+            </if>
+            <if test="gId !=null and gId != '' ">
+                #{gId},
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -3,7 +3,6 @@ package com.shangma.mapper.goods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.entity.goods.FreeGoods;
 import com.shangma.entity.goods.Goods;
-import com.shangma.entity.goods.GoodsCheck;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,4 +33,5 @@ public interface FreeGoodsMapper extends BaseMapper<FreeGoods> {
     int goodsToFree(@Param("id") Long id,
                     @Param("addStocks") Integer addStocks);
 
+    Long reduce(Integer num,Long id);
 }
