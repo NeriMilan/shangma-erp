@@ -47,6 +47,6 @@ public class FreeGoodsServiceImpl extends ServiceImpl<FreeGoodsMapper, FreeGoods
 
     @Override
     public boolean goodsToFree(Long id, Integer addStocks) {
-        return freeGoodsMapper.goodsToFree(id,addStocks)  == 1 ? true : false;
+        return freeGoodsMapper.goodsToFree(id,addStocks)  == 1 ? false : true;
     }
 }

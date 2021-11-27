@@ -6,12 +6,14 @@ import com.github.pagehelper.PageInfo;
 import com.shangma.common.http.AxiosResult;
 import com.shangma.common.pagebean.PageBean;
 import com.shangma.entity.goods.*;
+import com.shangma.entity.system.User;
 import com.shangma.service.goods.FreeGoodsService;
 import com.shangma.service.goods.GoodsCheckService;
 import com.shangma.service.goods.GoodsService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -116,8 +118,10 @@ public class FreeGoodsController {
      * 赠品转商品
      */
     @PostMapping("/ftog/add")
-    public AxiosResult insertGoodsCheck1(@RequestBody GoodsCheck goodsCheck) {
+    public AxiosResult insertGoodsCheck1(@RequestBody GoodsCheck goodsCheck, HttpServletRequest request) {
 //        boolean insert = freeGoodsService.insertGoodsCheck(goodsCheck);
+        User user =(User) request.getSession().getAttribute("user");
+        goodsCheck.setCheckBy(user.getId());
         goodsCheck.setCheckState(0);
         goodsCheck.setCheckKind(1);
         boolean insert = goodsCheckService.save(goodsCheck);
@@ -172,11 +176,14 @@ public class FreeGoodsController {
      * 商品转赠品
      */
     @PostMapping("/gtof/add/{changeStocks}")
-    public AxiosResult insertGoodsCheck2(@RequestBody Goods goods,@PathVariable Integer changeStocks) {
-//        QueryWrapper<FreeGoods> wrapper = new QueryWrapper();
-//        wrapper.eq("goods_id", id);
+    public AxiosResult insertGoodsCheck2(@RequestBody Goods goods,@PathVariable Integer changeStocks, HttpServletRequest request) {
+        QueryWrapper<FreeGoods> wrapper = new QueryWrapper();
+        wrapper.eq("goods_pid", goods.getId());
         GoodsCheck goodsCheck = new GoodsCheck();
-        if (freeGoodsService.getById(goods.getId()) != null) {
+        User user =(User) request.getSession().getAttribute("user");
+
+        if (freeGoodsService.getOne(wrapper) != null) {
+            goodsCheck.setCheckBy(user.getId());
             goodsCheck.setCheckState(0);
             goodsCheck.setCheckKind(2);
             goodsCheck.setChangeStocks(changeStocks);
@@ -243,8 +250,4 @@ public class FreeGoodsController {
         }
         return AxiosResult.success();
     }
-
-
-
-
 }

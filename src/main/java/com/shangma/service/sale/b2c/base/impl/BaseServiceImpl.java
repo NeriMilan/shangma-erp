@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.shangma.mapper.base.MyMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shangma.service.sale.b2c.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class BaseServiceImpl<T> implements BaseService<T> {
     @Autowired
-    private MyMapper<T> myMapper;
+    private BaseMapper<T> myMapper;
 
     @Override
     public List<T> findAll() {
